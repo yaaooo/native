@@ -1,25 +1,13 @@
-import { Parser } from '@/parsers/Parser';
-import { Dict, IParser, IUIDescriptor } from '../../types';
+import { Parser } from "@/parsers/Parser";
+import { Dict, IParser, IUIDescriptor } from "../../types";
 
-import '@/parsers';
-import '@/descriptors';
+import "@/parsers";
+import "@/descriptors";
 
 type TParser = IParser<any>;
 
 type Given<P> = {
   parser: P;
-};
-
-type ExpectedCall = (scope: Scope) => void;
-
-type TestCaseOptions = {
-  case: string;
-  description?: string;
-  given: Given<TParser | (() => TParser) | any>;
-  expected: {
-    parser?: Dict<ExpectedCall | any>;
-    descriptor?: Dict<ExpectedCall | any>;
-  };
 };
 
 export interface Scope<
@@ -35,9 +23,21 @@ export interface Scope<
   given: Required<Given<P>>;
 }
 
+type ExpectedCall = (scope: Scope) => void;
+
+type TestCaseOptions = {
+  case: string;
+  description?: string;
+  given: Given<TParser | (() => TParser) | any>;
+  expected: {
+    parser?: Dict<ExpectedCall | any>;
+    descriptor?: Dict<ExpectedCall | any>;
+  };
+};
+
 function toEqual(parser: any, prefix: string, actual: any, expected: Dict<any>, given: any) {
   Object.keys(expected).forEach((key) => {
-    if (typeof expected[key] === 'function') {
+    if (typeof expected[key] === "function") {
       it(`${prefix}.${key} validation should be succeed`, () => {
         const result = expected[key]({
           value: actual[key],
@@ -51,7 +51,7 @@ function toEqual(parser: any, prefix: string, actual: any, expected: Dict<any>, 
 
         expect(result).toBeTruthy();
       });
-    } else if (typeof expected[key] === 'object' && expected[key] !== null) {
+    } else if (typeof expected[key] === "object" && expected[key] !== null) {
       toEqual(parser, `${prefix}.${key}`, actual[key], expected[key], given);
     } else {
       it(`${prefix}.${key} should be equal to ${JSON.stringify(expected[key])}`, () => {
@@ -63,7 +63,7 @@ function toEqual(parser: any, prefix: string, actual: any, expected: Dict<any>, 
 
 export const TestParser = {
   Case({ description, given, expected, ...args }: TestCaseOptions): void {
-    const p = typeof given.parser === 'function'
+    const p = typeof given.parser === "function"
       ? given.parser()
       : given.parser instanceof Parser
         ? given.parser
@@ -73,7 +73,7 @@ export const TestParser = {
       return;
     }
 
-    if (typeof given.parser !== 'function' && !given.parser.options.descriptor) {
+    if (typeof given.parser !== "function" && !given.parser.options.descriptor) {
       (given.parser.options as any).descriptor = {};
     }
 
@@ -90,7 +90,7 @@ export const TestParser = {
       }
 
       if (expected.parser) {
-        toEqual(p, 'parser', p, expected.parser, given);
+        toEqual(p, "parser", p, expected.parser, given);
       }
     });
   }

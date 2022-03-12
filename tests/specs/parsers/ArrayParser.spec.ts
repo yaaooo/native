@@ -1,18 +1,18 @@
-import { ArrayParser } from '@/parsers/ArrayParser';
-import { TestParser, Scope } from '../../lib/TestParser';
+import { ArrayParser } from "@/parsers/ArrayParser";
+import { TestParser, Scope } from "../../lib/TestParser";
 
-describe('parsers/ArrayParser', () => {
+describe("parsers/ArrayParser", () => {
   TestParser.Case({
-    case: '0',
+    case: "0",
     given: {
       parser: new ArrayParser({
-        schema: { type: 'array' },
+        schema: { type: "array" },
         model: []
       })
     },
     expected: {
       parser: {
-        kind: 'array',
+        kind: "array",
         items: [],
         additionalItems: undefined,
         max: -2,
@@ -36,10 +36,10 @@ describe('parsers/ArrayParser', () => {
   });
 
   TestParser.Case({
-    case: '1.0',
+    case: "1.0",
     given: {
       parser: new ArrayParser({
-        schema: { type: 'array' },
+        schema: { type: "array" },
         model: undefined
       })
     },
@@ -53,22 +53,22 @@ describe('parsers/ArrayParser', () => {
   });
 
   TestParser.Case({
-    case: '1.1',
+    case: "1.1",
     given: {
       parser: new ArrayParser({
         schema: {
-          type: 'array',
-          items: { type: 'string' },
-          default: [ 'arya' ]
+          type: "array",
+          items: { type: "string" },
+          default: [ "arya" ]
         },
         model: undefined
       })
     },
     expected: {
       parser: {
-        initialValue: [ 'arya' ],
-        model: [ 'arya' ],
-        rawValue: [ 'arya' ],
+        initialValue: [ "arya" ],
+        model: [ "arya" ],
+        rawValue: [ "arya" ],
         field: {
           sortable: true
         }
@@ -77,12 +77,12 @@ describe('parsers/ArrayParser', () => {
   });
 
   TestParser.Case({
-    case: '1.2',
+    case: "1.2",
     given: {
       parser: new ArrayParser({
         schema: {
-          type: 'array',
-          items: { type: 'string', default: 'tyrion' },
+          type: "array",
+          items: { type: "string", default: "tyrion" },
           minItems: 1
         },
         model: undefined
@@ -91,19 +91,19 @@ describe('parsers/ArrayParser', () => {
     expected: {
       parser: {
         initialValue: [],
-        model: [ 'tyrion' ],
-        rawValue: [ 'tyrion' ]
+        model: [ "tyrion" ],
+        rawValue: [ "tyrion" ]
       }
     }
   });
 
   TestParser.Case({
-    case: '1.3',
+    case: "1.3",
     given: {
       parser: new ArrayParser({
         schema: {
-          type: 'array',
-          items: { type: 'string' }
+          type: "array",
+          items: { type: "string" }
         },
         model: undefined,
         required: true
@@ -119,10 +119,10 @@ describe('parsers/ArrayParser', () => {
   });
 
   TestParser.Case({
-    case: '2.0',
+    case: "2.0",
     given: {
       parser: new ArrayParser({
-        schema: { type: 'array' },
+        schema: { type: "array" },
         model: [ 12 ]
       })
     },
@@ -151,27 +151,27 @@ describe('parsers/ArrayParser', () => {
   });
 
   TestParser.Case({
-    case: '2.1',
-    description: 'field.getField()',
+    case: "2.1",
+    description: "field.getField()",
     given: {
       parser: new ArrayParser({
         schema: {
-          type: 'array',
+          type: "array",
           items: {
-            type: 'string'
+            type: "string"
           }
         },
-        model: [ 'Stark', 'Targaryen' ]
+        model: [ "Stark", "Targaryen" ]
       })
     },
     expected: {
       parser: {
         field: {
           getField({ value, field }: Scope) {
-            expect(value('.[]')).toBeNull();
-            expect(value('.[0]')).toBe(field.children[0]);
-            expect(value('.[1]')).toBe(field.children[1]);
-            expect(value('.[3]')).toBeNull();
+            expect(value(".[]")).toBeNull();
+            expect(value(".[0]")).toBe(field.children[0]);
+            expect(value(".[1]")).toBe(field.children[1]);
+            expect(value(".[3]")).toBeNull();
           }
         }
       }
@@ -179,14 +179,14 @@ describe('parsers/ArrayParser', () => {
   });
 
   TestParser.Case({
-    case: '2.2',
-    description: 'field.getField()',
+    case: "2.2",
+    description: "field.getField()",
     given: {
       parser: new ArrayParser({
         schema: {
-          type: 'array',
+          type: "array",
           items: {
-            type: 'string'
+            type: "string"
           }
         },
         model: []
@@ -196,10 +196,10 @@ describe('parsers/ArrayParser', () => {
       parser: {
         field: {
           getField({ value, field }: Scope) {
-            expect(value('')).toBe(field);
-            expect(value('.')).toBe(field);
-            expect(value('.unexsisting')).toBeNull();
-            expect(value('.[0]')).toBeNull();
+            expect(value("")).toBe(field);
+            expect(value(".")).toBe(field);
+            expect(value(".unexsisting")).toBeNull();
+            expect(value(".[0]")).toBeNull();
           }
         }
       }
@@ -207,14 +207,14 @@ describe('parsers/ArrayParser', () => {
   });
 
   TestParser.Case({
-    case: '3.0',
-    description: 'with options.required === true',
+    case: "3.0",
+    description: "with options.required === true",
     given: {
       parser: new ArrayParser({
         schema: {
-          type: 'array',
+          type: "array",
           items: [
-            { type: 'string' }
+            { type: "string" }
           ]
         },
         model: [],
@@ -223,7 +223,7 @@ describe('parsers/ArrayParser', () => {
     },
     expected: {
       parser: {
-        items: [ { type: 'string' } ],
+        items: [ { type: "string" } ],
         additionalItems: undefined,
         max: 1,
         count: 1,
@@ -249,8 +249,8 @@ describe('parsers/ArrayParser', () => {
 
   const options4: any = {
     schema: {
-      type: 'array',
-      items: { type: 'string' },
+      type: "array",
+      items: { type: "string" },
       minItems: 1,
       maxItems: 2,
       uniqueItems: true
@@ -259,14 +259,14 @@ describe('parsers/ArrayParser', () => {
   };
 
   TestParser.Case({
-    case: '4.0',
+    case: "4.0",
     given: {
       parser: new ArrayParser(options4)
     },
     expected: {
       parser: {
         items: [
-          { type: 'string' }
+          { type: "string" }
         ],
         additionalItems: undefined,
         get max() {
@@ -294,7 +294,7 @@ describe('parsers/ArrayParser', () => {
   });
 
   TestParser.Case({
-    case: '4.1',
+    case: "4.1",
     given: {
       parser() {
         const parser = new ArrayParser(options4);
@@ -326,8 +326,8 @@ describe('parsers/ArrayParser', () => {
   });
 
   TestParser.Case({
-    case: '4.2',
-    description: 'field.pushButton.trigger()',
+    case: "4.2",
+    description: "field.pushButton.trigger()",
     given: {
       parser() {
         const parser = new ArrayParser(options4);
@@ -363,32 +363,32 @@ describe('parsers/ArrayParser', () => {
 
   const options5: any = {
     schema: {
-      type: 'array',
-      items: { type: 'string', enum: [ 'a', 'b', 'c', 'd' ] },
+      type: "array",
+      items: { type: "string", enum: [ "a", "b", "c", "d" ] },
       uniqueItems: true
     },
-    model: [ 'b', 'd' ]
+    model: [ "b", "d" ]
   };
 
   TestParser.Case({
-    case: '5.0',
-    description: 'with array enums (checkbox)',
+    case: "5.0",
+    description: "with array enums (checkbox)",
     given: {
       parser: new ArrayParser(options5)
     },
     expected: {
       parser: {
         items: [
-          { type: 'string', default: 'a', title: 'a' },
-          { type: 'string', default: 'b', title: 'b' },
-          { type: 'string', default: 'c', title: 'c' },
-          { type: 'string', default: 'd', title: 'd' }
+          { type: "string", default: "a", title: "a" },
+          { type: "string", default: "b", title: "b" },
+          { type: "string", default: "c", title: "c" },
+          { type: "string", default: "d", title: "d" }
         ],
         additionalItems: undefined,
         max: 4,
         count: 4,
-        model: [ 'b', 'd' ],
-        rawValue: [ undefined, 'b', undefined, 'd' ],
+        model: [ "b", "d" ],
+        rawValue: [ undefined, "b", undefined, "d" ],
         limit: 4,
         children: ({ value }: Scope) => expect(value.length).toBe(4),
         field: {
@@ -396,7 +396,7 @@ describe('parsers/ArrayParser', () => {
           uniqueItems: true,
           children: ({ value: [ field0 ] }: Scope) => {
             // expect(field0.descriptor.kind).toBe('checkbox');
-            expect(field0.attrs.type).toBe('checkbox');
+            expect(field0.attrs.type).toBe("checkbox");
           },
           minItems: 0,
           maxItems: 4,
@@ -406,7 +406,7 @@ describe('parsers/ArrayParser', () => {
         }
       },
       descriptor: {
-        kind: 'array'
+        kind: "array"
       }
     }
   });
@@ -449,8 +449,8 @@ describe('parsers/ArrayParser', () => {
   // });
 
   TestParser.Case({
-    case: '5.2',
-    description: 'with updated checkbox input',
+    case: "5.2",
+    description: "with updated checkbox input",
     given: {
       parser() {
         const parser = new ArrayParser(options5);
@@ -463,36 +463,36 @@ describe('parsers/ArrayParser', () => {
     },
     expected: {
       parser: {
-        model: [ 'a', 'b', 'd' ],
-        rawValue: [ 'a', 'b', undefined, 'd' ]
+        model: [ "a", "b", "d" ],
+        rawValue: [ "a", "b", undefined, "d" ]
       }
     }
   });
 
   TestParser.Case({
-    case: '6',
-    description: 'with min/max and default model',
+    case: "6",
+    description: "with min/max and default model",
     given: {
       parser: new ArrayParser({
         schema: {
-          type: 'array',
-          items: { type: 'string' },
+          type: "array",
+          items: { type: "string" },
           minItems: 3,
           maxItems: 4
         },
-        model: [ 'a', 'd' ]
+        model: [ "a", "d" ]
       })
     },
     expected: {
       parser: {
         items: [
-          { type: 'string' }
+          { type: "string" }
         ],
         additionalItems: undefined,
         max: 4,
         count: 3,
-        model: [ 'a', 'd' ],
-        rawValue: [ 'a', 'd', undefined ],
+        model: [ "a", "d" ],
+        rawValue: [ "a", "d", undefined ],
         limit({ value }: Scope) {
           expect(value).toBe(this.count);
         },
@@ -510,32 +510,32 @@ describe('parsers/ArrayParser', () => {
   });
 
   TestParser.Case({
-    case: '7.0',
-    description: 'with additional items',
+    case: "7.0",
+    description: "with additional items",
     given: {
       parser: new ArrayParser({
         schema: {
-          type: 'array',
+          type: "array",
           items: [
-            { type: 'string' }
+            { type: "string" }
           ],
-          additionalItems: { type: 'number' }
+          additionalItems: { type: "number" }
         },
-        model: [ 'a', 12 ]
+        model: [ "a", 12 ]
       })
     },
     expected: {
       parser: {
         items: [
-          { type: 'string' }
+          { type: "string" }
         ],
-        additionalItems: { type: 'number' },
+        additionalItems: { type: "number" },
         max: -1,
         count() {
           return this.rawValue.length;
         },
-        model: [ 'a', 12 ],
-        rawValue: [ 'a', 12 ],
+        model: [ "a", 12 ],
+        rawValue: [ "a", 12 ],
         limit({ value }: Scope) {
           expect(value).toBe(this.items.length);
         },
@@ -556,24 +556,24 @@ describe('parsers/ArrayParser', () => {
   });
 
   TestParser.Case({
-    case: '7.1',
-    description: 'with an undefined schema type',
+    case: "7.1",
+    description: "with an undefined schema type",
     given: {
       parser: new ArrayParser({
         schema: {
-          type: 'array',
+          type: "array",
           items: [
-            { type: 'string' }
+            { type: "string" }
           ],
           additionalItems: { type: undefined } as any
         },
-        model: [ 'a', 12 ]
+        model: [ "a", 12 ]
       })
     },
     expected: {
       parser: {
         items: [
-          { type: 'string' }
+          { type: "string" }
         ],
         additionalItems: { type: undefined },
         children({ value }: Scope) {
@@ -584,18 +584,18 @@ describe('parsers/ArrayParser', () => {
   });
 
   const options8: any = (bracketedObjectInputNameValue: boolean) => ({
-    name: 'array',
+    name: "array",
     schema: {
-      type: 'array',
-      items: { type: 'string' }
+      type: "array",
+      items: { type: "string" }
     },
-    model: [ 'a', 12 ],
+    model: [ "a", 12 ],
     bracketedObjectInputName: bracketedObjectInputNameValue
   });
 
   TestParser.Case({
-    case: '8.0',
-    description: 'with name and bracketedObjectInputName === true',
+    case: "8.0",
+    description: "with name and bracketedObjectInputName === true",
     given: {
       parser: new ArrayParser(options8(true))
     },
@@ -610,26 +610,26 @@ describe('parsers/ArrayParser', () => {
   });
 
   TestParser.Case({
-    case: '8.1',
-    description: 'with name and bracketedObjectInputName === false',
+    case: "8.1",
+    description: "with name and bracketedObjectInputName === false",
     given: {
       parser: new ArrayParser(options8(false))
     },
     expected: {
       parser: {
         children({ value: items }: Scope) {
-          items.forEach(({ name }: any) => expect(name).toBe('array'));
+          items.forEach(({ name }: any) => expect(name).toBe("array"));
         }
       }
     }
   });
 
   TestParser.Case({
-    case: '9.0',
-    description: 'isEmpty() with an empty array',
+    case: "9.0",
+    description: "isEmpty() with an empty array",
     given: {
       parser: new ArrayParser({
-        schema: { type: 'array' }
+        schema: { type: "array" }
       })
     },
     expected: {
@@ -640,11 +640,11 @@ describe('parsers/ArrayParser', () => {
   });
 
   TestParser.Case({
-    case: '9.1',
-    description: 'isEmpty() with a non empty array',
+    case: "9.1",
+    description: "isEmpty() with a non empty array",
     given: {
       parser: new ArrayParser({
-        schema: { type: 'array' }
+        schema: { type: "array" }
       })
     },
     expected: {
@@ -655,11 +655,11 @@ describe('parsers/ArrayParser', () => {
   });
 
   TestParser.Case({
-    case: '9.2',
-    description: 'isEmpty() with default value',
+    case: "9.2",
+    description: "isEmpty() with default value",
     given: {
       parser: new ArrayParser({
-        schema: { type: 'array', default: [ 2 ] }
+        schema: { type: "array", default: [ 2 ] }
       })
     },
     expected: {
@@ -670,8 +670,8 @@ describe('parsers/ArrayParser', () => {
   });
 
   TestParser.Case({
-    case: '10',
-    description: 'field.deep validation',
+    case: "10",
+    description: "field.deep validation",
     given: {
       parser: new ArrayParser(options8(true))
     },
@@ -688,11 +688,11 @@ describe('parsers/ArrayParser', () => {
   });
 
   TestParser.Case({
-    case: '11.0',
-    description: 'parser.reset()',
+    case: "11.0",
+    description: "parser.reset()",
     given: {
       parser() {
-        const model = [ 'arya' ];
+        const model = [ "arya" ];
         const onChange = jest.fn();
         const parser = new ArrayParser({ ...options4, model, onChange });
 
@@ -706,28 +706,28 @@ describe('parsers/ArrayParser', () => {
         reset({ parser }: Scope) {
           const onChange = parser.options.onChange;
           const expected = [
-            [ 'arya' ],
-            [ 'jon' ]
+            [ "arya" ],
+            [ "jon" ]
           ];
 
-          expect(parser.rawValue).toEqual([ 'arya' ]);
-          expect(parser.model).toEqual([ 'arya' ]);
+          expect(parser.rawValue).toEqual([ "arya" ]);
+          expect(parser.model).toEqual([ "arya" ]);
           expect(onChange.mock.calls.length).toBe(1);
           expect(onChange.mock.calls[0][0]).toEqual(expected[0]);
 
-          parser.field.children[0].setValue('jon');
+          parser.field.children[0].setValue("jon");
 
           expect(onChange.mock.calls.length).toBe(2);
           expect(onChange.mock.calls[1][0]).toEqual(expected[1]);
-          expect(parser.rawValue).toEqual([ 'jon' ]);
-          expect(parser.model).toEqual([ 'jon' ]);
+          expect(parser.rawValue).toEqual([ "jon" ]);
+          expect(parser.model).toEqual([ "jon" ]);
 
           parser.reset(); // reset without calling onChange
 
           expect(onChange.mock.calls.length).toBe(2);
-          expect(parser.initialValue).toEqual([ 'arya' ]);
-          expect(parser.rawValue).toEqual([ 'arya' ]);
-          expect(parser.model).toEqual([ 'arya' ]);
+          expect(parser.initialValue).toEqual([ "arya" ]);
+          expect(parser.rawValue).toEqual([ "arya" ]);
+          expect(parser.model).toEqual([ "arya" ]);
 
           parser.field.reset(); // reset with calling onChange
 
@@ -739,11 +739,11 @@ describe('parsers/ArrayParser', () => {
   });
 
   TestParser.Case({
-    case: '12.0',
-    description: 'parser.clear()',
+    case: "12.0",
+    description: "parser.clear()",
     given: {
       parser() {
-        const model = [ 'arya' ];
+        const model = [ "arya" ];
         const onChange = jest.fn();
         const parser = new ArrayParser({ ...options4, model, onChange });
 
@@ -757,26 +757,26 @@ describe('parsers/ArrayParser', () => {
         clear({ parser }: Scope) {
           const onChange = parser.options.onChange;
           const expected = [
-            [ 'arya' ],
-            [ 'jon' ]
+            [ "arya" ],
+            [ "jon" ]
           ];
 
-          expect(parser.rawValue).toEqual([ 'arya' ]);
-          expect(parser.model).toEqual([ 'arya' ]);
+          expect(parser.rawValue).toEqual([ "arya" ]);
+          expect(parser.model).toEqual([ "arya" ]);
           expect(onChange.mock.calls.length).toBe(1);
           expect(onChange.mock.calls[0][0]).toEqual(expected[0]);
 
-          parser.field.children[0].setValue('jon');
+          parser.field.children[0].setValue("jon");
 
           expect(onChange.mock.calls.length).toBe(2);
           expect(onChange.mock.calls[1][0]).toEqual(expected[1]);
-          expect(parser.rawValue).toEqual([ 'jon' ]);
-          expect(parser.model).toEqual([ 'jon' ]);
+          expect(parser.rawValue).toEqual([ "jon" ]);
+          expect(parser.model).toEqual([ "jon" ]);
 
           parser.clear(); // clear without calling onChange
 
           expect(onChange.mock.calls.length).toBe(2);
-          expect(parser.initialValue).toEqual([ 'arya' ]);
+          expect(parser.initialValue).toEqual([ "arya" ]);
           expect(parser.rawValue).toEqual([ undefined ]);
           expect(parser.model).toEqual([]);
 
@@ -790,14 +790,14 @@ describe('parsers/ArrayParser', () => {
   });
 
   TestParser.Case({
-    case: '13.0',
-    description: 'field.addItemValue()',
+    case: "13.0",
+    description: "field.addItemValue()",
     given: {
       parser: new ArrayParser({
         schema: {
-          type: 'array',
+          type: "array",
           maxItems: 1,
-          items: { type: 'string', default: 'arya' }
+          items: { type: "string", default: "arya" }
         },
         model: []
       })
@@ -810,15 +810,15 @@ describe('parsers/ArrayParser', () => {
              * scenario: successfully add a new item
              */
             expect(field.value).toEqual([]);
-            addItemValue('jon');
-            expect(field.value).toEqual([ 'jon' ]);
+            addItemValue("jon");
+            expect(field.value).toEqual([ "jon" ]);
 
             /**
              * scenario: failed to add a new item when the push button is disabled
              */
             expect(field.pushButton.disabled).toBeTruthy();
-            addItemValue('baryon');
-            expect(field.value).toEqual([ 'jon' ]);
+            addItemValue("baryon");
+            expect(field.value).toEqual([ "jon" ]);
           }
         }
       }

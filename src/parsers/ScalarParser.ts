@@ -1,8 +1,8 @@
-import { Parser } from '@/parsers/Parser';
+import { Parser } from "@/parsers/Parser";
 
-import { Pattern } from '@/lib/Pattern';
-import { ScalarUIDescriptor } from '@/descriptors/ScalarUIDescriptor';
-import { JsonSchema } from '../../types/jsonschema';
+import { Pattern } from "@/lib/Pattern";
+import { ScalarUIDescriptor } from "@/descriptors/ScalarUIDescriptor";
+import { JsonSchema } from "../../types/jsonschema";
 
 import {
   FieldKind,
@@ -10,7 +10,7 @@ import {
   ParserOptions,
   UnknowParser,
   ScalarDescriptor
-} from '../../types';
+} from "../../types";
 
 export abstract class ScalarParser <
   TModel,
@@ -18,7 +18,7 @@ export abstract class ScalarParser <
 > extends Parser<TModel, TField, ScalarDescriptor, ScalarUIDescriptor> {
   static getKind(schema: JsonSchema, parent?: UnknowParser): FieldKind | null {
     if (parent && parent.schema.enum instanceof Array) {
-      return 'radio';
+      return "radio";
     }
 
     return null;
@@ -26,8 +26,8 @@ export abstract class ScalarParser <
 
   static getType(kind: FieldKind): string | null {
     switch (kind) {
-      case 'radio':
-      case 'hidden':
+      case "radio":
+      case "hidden":
         return kind;
 
       default:

@@ -1,5 +1,5 @@
-import { UIDescriptor } from '@/descriptors/UIDescriptor';
-import { Components } from '@/lib/Components';
+import { UIDescriptor } from "@/descriptors/UIDescriptor";
+import { Components } from "@/lib/Components";
 
 import {
   ArrayField,
@@ -11,7 +11,7 @@ import {
   PushButtonDescriptor,
   ArrayItemButton,
   ArrayItemField
-} from '../../types';
+} from "../../types";
 
 function parseActionButton(itemField: ArrayItemField, buttons: ArrayItemButton[]): any {
   return buttons.map((button) => {
@@ -32,18 +32,18 @@ function parseActionButton(itemField: ArrayItemField, buttons: ArrayItemButton[]
 
 const BUTTONS: Record<string, ArrayItemButton> = {
   moveUp: {
-    type: 'moveUp',
-    label: '↑',
+    type: "moveUp",
+    label: "↑",
     tooltip: undefined
   },
   moveDown: {
-    type: 'moveDown',
-    label: '↓',
+    type: "moveDown",
+    label: "↓",
     tooltip: undefined
   },
   delete: {
-    type: 'delete',
-    label: '-',
+    type: "delete",
+    label: "-",
     tooltip: undefined
   }
 };
@@ -51,14 +51,14 @@ const BUTTONS: Record<string, ArrayItemButton> = {
 export class ArrayUIDescriptor extends UIDescriptor<ArrayField, ArrayDescriptor> implements IArrayDescriptor {
   readonly layout: Component;
   readonly items: DescriptorInstance[] | DescriptorInstance = {};
-  readonly pushButton: PushButtonDescriptor = { type: 'push', label: '+' } as any;
+  readonly pushButton: PushButtonDescriptor = { type: "push", label: "+" } as any;
   readonly buttons: ArrayItemButton[] = [];
   readonly children: IArrayChildDescriptor[] = [];
 
   constructor(definition: ArrayDescriptor, field: Readonly<ArrayField>, components: Components) {
     super(definition, field, components);
 
-    this.layout = definition.layout || 'fieldset';
+    this.layout = definition.layout || "fieldset";
     this.items = definition.items || {};
   }
 
@@ -85,12 +85,12 @@ export class ArrayUIDescriptor extends UIDescriptor<ArrayField, ArrayDescriptor>
       Object.assign(this.pushButton, this.definition.pushButton);
     }
 
-    Object.defineProperty(this.pushButton, 'disabled', {
+    Object.defineProperty(this.pushButton, "disabled", {
       enumerable: true,
       get: () => field.pushButton.disabled
     });
 
-    if (!this.pushButton.hasOwnProperty('trigger')) {
+    if (!this.pushButton.hasOwnProperty("trigger")) {
       this.pushButton.trigger = () => field.pushButton.trigger();
     }
   }
@@ -111,4 +111,4 @@ export class ArrayUIDescriptor extends UIDescriptor<ArrayField, ArrayDescriptor>
   }
 }
 
-UIDescriptor.register('array', ArrayUIDescriptor);
+UIDescriptor.register("array", ArrayUIDescriptor);

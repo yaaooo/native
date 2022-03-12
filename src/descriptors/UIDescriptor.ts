@@ -1,5 +1,5 @@
-import { NativeElements } from '@/lib/NativeElements';
-import { JsonSchema } from '../../types/jsonschema';
+import { NativeElements } from "@/lib/NativeElements";
+import { JsonSchema } from "../../types/jsonschema";
 
 import {
   Dict,
@@ -11,7 +11,7 @@ import {
   LabelAttributes,
   DescriptorDefinition,
   IComponents
-} from '../../types';
+} from "../../types";
 
 const DESCRIPTORS: Dict<any> = {};
 
@@ -44,7 +44,7 @@ export abstract class UIDescriptor<
       throw new TypeError(`Unknow descriptor kind '${field.kind}'`);
     }
 
-    if (typeof options === 'function') {
+    if (typeof options === "function") {
       options = options(field);
     }
 
@@ -52,7 +52,7 @@ export abstract class UIDescriptor<
   }
 
   constructor(definition: TDescriptorDefinition, field: TField, components?: IComponents) {
-    this.visible = typeof definition.visible === 'boolean' ? definition.visible : true;
+    this.visible = typeof definition.visible === "boolean" ? definition.visible : true;
     this.kind = field.kind;
     this.attrs = { ...field.attrs, ...(definition.attrs || {}) };
     this.props = definition.props || {};
@@ -61,13 +61,13 @@ export abstract class UIDescriptor<
     this.schema = field.schema;
     this.definition = definition;
 
-    this.label = definition.hasOwnProperty('label')
-      ? definition.label || ''
-      : field.schema.title || '';
+    this.label = definition.hasOwnProperty("label")
+      ? definition.label || ""
+      : field.schema.title || "";
 
-    this.helper = definition.hasOwnProperty('helper')
-      ? definition.helper || ''
-      : field.schema.description || '';
+    this.helper = definition.hasOwnProperty("helper")
+      ? definition.helper || ""
+      : field.schema.description || "";
 
     this.labelAttrs = {
       id: this.label ? `${this.attrs.id}-label` : undefined,
@@ -83,8 +83,8 @@ export abstract class UIDescriptor<
      * associate instructions with form controls
      * @see https://www.w3.org/WAI/tutorials/forms/instructions/#providing-instructions-outside-labels
      */
-    this.attrs['aria-labelledby'] = this.labelAttrs.id;
-    this.attrs['aria-describedby'] = this.helperAttrs.id;
+    this.attrs["aria-labelledby"] = this.labelAttrs.id;
+    this.attrs["aria-describedby"] = this.helperAttrs.id;
   }
 
   parse(field: TField): void {

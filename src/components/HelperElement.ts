@@ -1,19 +1,19 @@
-import { VNode } from 'vue';
-import { HelperComponent } from '../../types';
+import { VNode } from "vue";
+import { HelperComponent } from "../../types";
 
 export const HelperElement: HelperComponent = {
-  name: 'HelperElement',
+  name: "HelperElement",
   functional: true,
   render(h, { props }): VNode | VNode[] {
     const field = props.field;
     const descriptor = props.field.descriptor;
 
     if (descriptor.helper) {
-      const tag = field.isRoot ? 'p' : 'span';
+      const tag = field.isRoot ? "p" : "span";
       const data = {
         attrs: {
           ...descriptor.helperAttrs,
-          'data-fs-helper': true
+          "data-fs-helper": true
         }
       };
 

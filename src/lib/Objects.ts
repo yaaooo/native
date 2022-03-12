@@ -1,4 +1,4 @@
-import { Dict } from '../../types';
+import { Dict } from "../../types";
 
 export const Objects = {
   isObject(value: unknown): boolean {
@@ -6,7 +6,7 @@ export const Objects = {
   },
 
   isGenericObject(value: unknown): boolean {
-    return value !== null && typeof value === 'object';
+    return value !== null && typeof value === "object";
   },
 
   equal(x: Dict<any>, y: Dict<any>): boolean {
@@ -14,7 +14,7 @@ export const Objects = {
       return true;
     }
 
-    if ((typeof x === 'object' && x != null) && (typeof y === 'object' && y !== null)) {
+    if ((typeof x === "object" && x != null) && (typeof y === "object" && y !== null)) {
       if (Object.keys(x).length !== Object.keys(y).length) {
         return false;
       }
@@ -39,7 +39,7 @@ export const Objects = {
     Object.keys(src).forEach((key) => {
       const value = src[key];
 
-      if (!Objects.isObject(value) || typeof value === 'function') {
+      if (!Objects.isObject(value) || typeof value === "function") {
         dest[key] = value;
       } else if (value instanceof Array) {
         dest[key] = [ ...value ];

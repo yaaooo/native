@@ -1,23 +1,23 @@
-import { VNode } from 'vue';
-import { CreateElement } from 'vue/types/umd';
-import { UniqueId as UniqueIdLib } from '@/lib/UniqueId';
-import { Objects as ObjectsLib } from '@/lib/Objects';
-import { Components as ComponentsLib } from '@/lib/Components';
-import { Fieldset as FieldsetLib } from '@/lib/Fieldset';
-import { Parser as ParserLib } from '@/parsers/Parser';
-import { NativeElements as NativeElementsLib } from '@/lib/NativeElements';
-import { NativeComponents as NativeComponentsLib } from '@/lib/NativeComponents';
-import { UIDescriptor as UIDescriptorLib } from '@/descriptors/UIDescriptor';
+import { VNode } from "vue";
+import { CreateElement } from "vue/types/umd";
+import { UniqueId as UniqueIdLib } from "@/lib/UniqueId";
+import { Objects as ObjectsLib } from "@/lib/Objects";
+import { Components as ComponentsLib } from "@/lib/Components";
+import { Fieldset as FieldsetLib } from "@/lib/Fieldset";
+import { Parser as ParserLib } from "@/parsers/Parser";
+import { NativeElements as NativeElementsLib } from "@/lib/NativeElements";
+import { NativeComponents as NativeComponentsLib } from "@/lib/NativeComponents";
+import { UIDescriptor as UIDescriptorLib } from "@/descriptors/UIDescriptor";
 
-import '@/parsers';
-import '@/descriptors';
+import "@/parsers";
+import "@/descriptors";
 
 import {
   ComponentOptions,
   RenderContext,
   WatchOptions,
   ComputedOptions
-} from 'vue/types/options';
+} from "vue/types/options";
 
 import {
   SubmitEvent,
@@ -29,9 +29,9 @@ import {
   IParser,
   IUIDescriptor,
   ValidatorFunction
-} from '../../types';
+} from "../../types";
 
-import { JsonSchema } from '../../types/jsonschema';
+import { JsonSchema } from "../../types/jsonschema";
 
 /**
  * FormSchema API
@@ -67,6 +67,18 @@ interface FormSchemaVue extends Vue {
   update(updatedFields: UnknowField[]): void;
 }
 
+type Accessors<T, V> = {
+  [K in keyof T]: ((this: V) => T[K]) | ComputedOptions<T[K]>
+}
+
+type WatchHandler<V extends Vue, T> = (this: V, val: T, oldVal: T) => void;
+
+interface WatchOptionsWithHandler<V extends Vue, T> extends WatchOptions {
+  handler: WatchHandler<V, T>;
+}
+
+type Props = Record<string, any>;
+
 interface FormSchemaComponent<V extends FormSchemaVue = FormSchemaVue> extends ComponentOptions<V> {
   computed: Accessors<Dict, V>;
   watch?: Record<string, WatchOptionsWithHandler<V, any> | WatchHandler<V, any> | string>;
@@ -89,17 +101,6 @@ interface FormSchemaComponent<V extends FormSchemaVue = FormSchemaVue> extends C
   serverPrefetch?(this: V): Promise<void>;
 }
 
-type Accessors<T, V> = {
-  [K in keyof T]: ((this: V) => T[K]) | ComputedOptions<T[K]>
-}
-
-type Props = Record<string, any>;
-type WatchHandler<V extends Vue, T> = (this: V, val: T, oldVal: T) => void;
-
-interface WatchOptionsWithHandler<V extends Vue, T> extends WatchOptions {
-  handler: WatchHandler<V, T>;
-}
-
 export const GLOBAL = {
   Elements: Object.freeze(NativeElementsLib)
 };
@@ -116,10 +117,10 @@ export const NativeComponents = NativeComponentsLib;
  * @slot default - Use default slot to insert custom form buttons
  */
 const FormSchema: FormSchemaComponent = {
-  name: 'FormSchema',
+  name: "FormSchema",
   model: {
-    prop: 'value',
-    event: 'input'
+    prop: "value",
+    event: "input"
   },
   props: {
     /**
@@ -150,7 +151,7 @@ const FormSchema: FormSchemaComponent = {
      */
     id: {
       type: String,
-      default: UniqueId.get('form')
+      default: UniqueId.get("form")
     },
 
     /**
@@ -236,7 +237,7 @@ const FormSchema: FormSchemaComponent = {
   },
   data: () => ({
     key: undefined,
-    ref: UniqueId.get('formschema'),
+    ref: UniqueId.get("formschema"),
     initialModel: undefined,
     ready: false,
     parser: null
@@ -325,13 +326,13 @@ const FormSchema: FormSchemaComponent = {
       nodes.push(...this.$slots.default);
     }
 
-    return createElement(this.components.get('form'), {
+    return createElement(this.components.get("form"), {
       ref: this.ref,
       key: this.key,
       attrs: {
         id: this.id,
         name: this.name,
-        role: this.search ? 'search' : undefined
+        role: this.search ? "search" : undefined
       },
       props: props,
       on: this.listeners
@@ -384,7 +385,7 @@ const FormSchema: FormSchemaComponent = {
       /**
        * Fired synchronously when the value of an element is changed.
        */
-      this.$emit('input', value);
+      this.$emit("input", value);
 
       this.$nextTick(() => {
         this.ready = true;

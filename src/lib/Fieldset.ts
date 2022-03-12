@@ -1,5 +1,5 @@
-import { VNode } from 'vue';
-import { CreateElement, ObjectField, ObjectFieldChild } from '../../types';
+import { VNode } from "vue";
+import { CreateElement, ObjectField, ObjectFieldChild } from "../../types";
 
 export const Fieldset = {
   renderChildren(h: CreateElement, field: ObjectField, children: ObjectFieldChild[] = field.children): VNode[] {
@@ -18,24 +18,24 @@ export const Fieldset = {
     return field.descriptor.childrenGroups.map(({ id, label, children }) => {
       const childrenNodes = Fieldset.renderChildren(h, field, children);
       const nodes = [
-        h('div', {
+        h("div", {
           attrs: {
-            'data-fs-group-nodes': childrenNodes.length
+            "data-fs-group-nodes": childrenNodes.length
           }
         }, childrenNodes)
       ];
 
       if (label) {
-        nodes.unshift(h('div', {
+        nodes.unshift(h("div", {
           attrs: {
-            'data-fs-group-label': id
+            "data-fs-group-label": id
           }
         }, label));
       }
 
-      return h('div', {
+      return h("div", {
         attrs: {
-          'data-fs-group': id
+          "data-fs-group": id
         }
       }, nodes);
     });

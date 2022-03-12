@@ -6,6 +6,6 @@ export const Pattern = {
    * @see https://stackoverflow.com/a/6969486
    */
   escape(str: string): string {
-    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   }
 };

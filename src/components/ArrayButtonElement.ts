@@ -1,16 +1,16 @@
-import { VNode } from 'vue';
-import { ArrayButtonComponent } from '../../types';
+import { VNode } from "vue";
+import { ArrayButtonComponent } from "../../types";
 
 export const ArrayButtonElement: ArrayButtonComponent = {
   functional: true,
-  name: 'ArrayButtonElement',
+  name: "ArrayButtonElement",
   render(h, { props: { button } }): VNode | VNode[] {
-    return h('button', {
+    return h("button", {
       attrs: {
-        type: 'button',
+        type: "button",
         title: button.tooltip,
         disabled: button.disabled,
-        'data-fs-button': button.type
+        "data-fs-button": button.type
       },
       on: {
         click: button.trigger as any

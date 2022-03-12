@@ -1,4 +1,4 @@
-import { Parser } from '@/parsers/Parser';
+import { Parser } from "@/parsers/Parser";
 
 import {
   ParserOptions,
@@ -9,7 +9,7 @@ import {
   ISetParser,
   UnknowField,
   UnknowSetField
-} from '../../types';
+} from "../../types";
 
 const RE_ARRAY_PATH = /(.+)?\[(\d+)\]$/;
 
@@ -27,7 +27,7 @@ export abstract class SetParser<
   TSetUIDescriptor extends ISetDescriptor
 > extends Parser<TModel, TField, TSetDescriptor, TSetUIDescriptor> implements ISetParser<TModel, TField, TSetDescriptor> {
   constructor(
-    kind: 'enum' | 'array' | 'object',
+    kind: "enum" | "array" | "object",
     options: ParserOptions<TModel, TField, TSetDescriptor>,
     parent?: UnknowParser
   ) {
@@ -44,13 +44,13 @@ export abstract class SetParser<
     };
 
     this.field.getField = (path) => {
-      const formatedPath = path[0] === '.' ? path.substring(1) : path;
+      const formatedPath = path[0] === "." ? path.substring(1) : path;
 
       if (!formatedPath) {
         return this.field;
       }
 
-      const paths = formatedPath.split('.');
+      const paths = formatedPath.split(".");
       let fields = this.field.fields;
       let foundField: UnknowField | null = null;
 

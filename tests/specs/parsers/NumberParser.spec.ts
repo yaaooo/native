@@ -1,14 +1,14 @@
-import { NumberParser } from '@/parsers/NumberParser';
-import { TestParser, Scope } from '../../lib/TestParser';
+import { NumberParser } from "@/parsers/NumberParser";
+import { TestParser, Scope } from "../../lib/TestParser";
 
-describe('parsers/NumberParser', () => {
+describe("parsers/NumberParser", () => {
   TestParser.Case({
-    case: '0.0',
-    description: 'parser.reset()',
+    case: "0.0",
+    description: "parser.reset()",
     given: {
       parser: new NumberParser({
         schema: {
-          type: 'number',
+          type: "number",
           minimum: 0,
           maximum: 10,
           multipleOf: 2
@@ -18,10 +18,10 @@ describe('parsers/NumberParser', () => {
     },
     expected: {
       parser: {
-        kind: ({ value }: Scope) => expect(value).toBe('number'),
+        kind: ({ value }: Scope) => expect(value).toBe("number"),
         field: {
           attrs: {
-            type: ({ value }: Scope) => expect(value).toBe('number'),
+            type: ({ value }: Scope) => expect(value).toBe("number"),
             min: ({ value, options }: Scope) => expect(value).toBe(options.schema.minimum),
             max: ({ value, options }: Scope) => expect(value).toBe(options.schema.maximum),
             step: ({ value, options }: Scope) => expect(value).toBe(options.schema.multipleOf),
@@ -33,9 +33,9 @@ describe('parsers/NumberParser', () => {
     }
   });
 
-  it('should successfully parse default number value', () => {
+  it("should successfully parse default number value", () => {
     const parser = new NumberParser({
-      schema: { type: 'number' },
+      schema: { type: "number" },
       model: 3.1
     });
 
@@ -44,9 +44,9 @@ describe('parsers/NumberParser', () => {
     expect(parser.field.value).toBe(3.1);
   });
 
-  it('field.value should parse default non number value as an undefined model', () => {
+  it("field.value should parse default non number value as an undefined model", () => {
     const parser = new NumberParser({
-      schema: { type: 'number' },
+      schema: { type: "number" },
       model: undefined
     });
 
@@ -55,10 +55,10 @@ describe('parsers/NumberParser', () => {
     expect(parser.field.value).toBeUndefined();
   });
 
-  describe('exclusiveMinimum/exclusiveMaximum', () => {
+  describe("exclusiveMinimum/exclusiveMaximum", () => {
     const parser = new NumberParser({
       schema: {
-        type: 'number',
+        type: "number",
         exclusiveMinimum: 0,
         exclusiveMaximum: 10
       },
@@ -67,22 +67,22 @@ describe('parsers/NumberParser', () => {
 
     parser.parse();
 
-    it('field.attrs.min should equal define using schema.exclusiveMinimum', () => {
+    it("field.attrs.min should equal define using schema.exclusiveMinimum", () => {
       expect(parser.field.attrs.min).toBe(0.1);
     });
 
-    it('field.attrs.max should equal define using schema.exclusiveMaximum', () => {
+    it("field.attrs.max should equal define using schema.exclusiveMaximum", () => {
       expect(parser.field.attrs.max).toBe(9.9);
     });
   });
 
   TestParser.Case({
-    case: '1.0',
-    description: 'parser.reset()',
+    case: "1.0",
+    description: "parser.reset()",
     given: {
       parser: new NumberParser({
         schema: {
-          type: 'number',
+          type: "number",
           minimum: 0,
           maximum: 10,
           multipleOf: 2
@@ -119,12 +119,12 @@ describe('parsers/NumberParser', () => {
   });
 
   TestParser.Case({
-    case: '2.0',
-    description: 'parser.clear()',
+    case: "2.0",
+    description: "parser.clear()",
     given: {
       parser: new NumberParser({
         schema: {
-          type: 'number',
+          type: "number",
           minimum: 0,
           maximum: 10,
           multipleOf: 2

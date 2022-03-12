@@ -1,7 +1,7 @@
-import { Parser } from '@/parsers/Parser';
-import { ScalarParser } from '@/parsers/ScalarParser';
-import { Value } from '@/lib/Value';
-import { JsonSchema } from '../../types/jsonschema';
+import { Parser } from "@/parsers/Parser";
+import { ScalarParser } from "@/parsers/ScalarParser";
+import { Value } from "@/lib/Value";
+import { JsonSchema } from "../../types/jsonschema";
 
 import {
   Dict,
@@ -10,51 +10,51 @@ import {
   ParserOptions,
   UnknowParser,
   ScalarDescriptor
-} from '../../types';
+} from "../../types";
 
 const TypeFormat: Dict<string> = {
-  date: 'date',
-  'date-time': 'datetime-local',
-  email: 'email',
-  'idn-email': 'email',
-  time: 'time',
-  uri: 'url'
+  date: "date",
+  "date-time": "datetime-local",
+  email: "email",
+  "idn-email": "email",
+  time: "time",
+  uri: "url"
 };
 
 function getKind(schema: JsonSchema) {
   if (schema.contentMediaType) {
     const mime = schema.contentMediaType;
 
-    if (mime.startsWith('text/')) {
-      return 'textarea';
+    if (mime.startsWith("text/")) {
+      return "textarea";
     }
 
-    if (mime.startsWith('image/')) {
-      return 'image';
+    if (mime.startsWith("image/")) {
+      return "image";
     }
 
-    return 'file';
+    return "file";
   }
 
-  return 'string';
+  return "string";
 }
 
 function getType(kind: FieldKind, schema: JsonSchema) {
   switch (kind) {
-    case 'file':
-    case 'password':
+    case "file":
+    case "password":
       return kind;
 
-    case 'image':
-      return 'file';
+    case "image":
+      return "file";
 
-    case 'textarea':
+    case "textarea":
       return undefined;
 
     default:
       return schema.format
         ? TypeFormat[schema.format]
-        : 'text';
+        : "text";
   }
 }
 
@@ -68,18 +68,18 @@ export class StringParser extends ScalarParser<string, StringField> {
   }
 
   isEmpty(data: unknown = this.model): boolean {
-    return typeof data === 'string' ? data.length === 0 : true;
+    return typeof data === "string" ? data.length === 0 : true;
   }
 
   parseField(): void {
     super.parseField();
 
-    if (this.field.attrs.type === 'file') {
+    if (this.field.attrs.type === "file") {
       this.field.attrs.accept = this.schema.contentMediaType;
     }
 
     if (this.field.attrs.type) {
-      Object.defineProperty(this.field.attrs, 'value', {
+      Object.defineProperty(this.field.attrs, "value", {
         enumerable: true,
         configurable: true,
         get: () => this.model
@@ -99,8 +99,8 @@ export class StringParser extends ScalarParser<string, StringField> {
   }
 }
 
-Parser.register('string', StringParser);
-Parser.register('password', StringParser);
-Parser.register('file', StringParser);
-Parser.register('image', StringParser);
-Parser.register('textarea', StringParser);
+Parser.register("string", StringParser);
+Parser.register("password", StringParser);
+Parser.register("file", StringParser);
+Parser.register("image", StringParser);
+Parser.register("textarea", StringParser);

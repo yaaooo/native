@@ -1,13 +1,13 @@
-import { IntegerParser } from '@/parsers/IntegerParser';
-import { TestParser, Scope } from '../../lib/TestParser';
+import { IntegerParser } from "@/parsers/IntegerParser";
+import { TestParser, Scope } from "../../lib/TestParser";
 
-describe('parsers/IntegerParser', () => {
+describe("parsers/IntegerParser", () => {
   TestParser.Case({
-    case: '0.0',
+    case: "0.0",
     given: {
       parser: new IntegerParser({
         schema: {
-          type: 'integer',
+          type: "integer",
           minimum: 0,
           maximum: 10,
           multipleOf: 2
@@ -17,10 +17,10 @@ describe('parsers/IntegerParser', () => {
     },
     expected: {
       parser: {
-        kind: ({ value }: Scope) => expect(value).toBe('integer'),
+        kind: ({ value }: Scope) => expect(value).toBe("integer"),
         field: {
           attrs: {
-            type: ({ value }: Scope) => expect(value).toBe('number'),
+            type: ({ value }: Scope) => expect(value).toBe("number"),
             min: ({ value, options }: Scope) => expect(value).toBe(options.schema.minimum),
             max: ({ value, options }: Scope) => expect(value).toBe(options.schema.maximum),
             value: ({ value, options }: Scope) => expect(value).toBe(`${options.model}`)
@@ -31,9 +31,9 @@ describe('parsers/IntegerParser', () => {
     }
   });
 
-  it('should successfully parse default integer value', () => {
+  it("should successfully parse default integer value", () => {
     const parser = new IntegerParser({
-      schema: { type: 'integer' },
+      schema: { type: "integer" },
       model: 3
     });
 
@@ -42,9 +42,9 @@ describe('parsers/IntegerParser', () => {
     expect(parser.field.value).toBe(3);
   });
 
-  it('field.value should parse default non integer value as an undefined model', () => {
+  it("field.value should parse default non integer value as an undefined model", () => {
     const parser = new IntegerParser({
-      schema: { type: 'integer' },
+      schema: { type: "integer" },
       model: undefined
     });
 
@@ -53,10 +53,10 @@ describe('parsers/IntegerParser', () => {
     expect(parser.field.value).toBeUndefined();
   });
 
-  describe('exclusiveMinimum/exclusiveMaximum', () => {
+  describe("exclusiveMinimum/exclusiveMaximum", () => {
     const parser = new IntegerParser({
       schema: {
-        type: 'integer',
+        type: "integer",
         exclusiveMinimum: 0,
         exclusiveMaximum: 10
       },
@@ -65,22 +65,22 @@ describe('parsers/IntegerParser', () => {
 
     parser.parse();
 
-    it('field.attrs.min should equal define using schema.exclusiveMinimum', () => {
+    it("field.attrs.min should equal define using schema.exclusiveMinimum", () => {
       expect(parser.field.attrs.min).toBe(1);
     });
 
-    it('field.attrs.max should equal define using schema.exclusiveMaximum', () => {
+    it("field.attrs.max should equal define using schema.exclusiveMaximum", () => {
       expect(parser.field.attrs.max).toBe(9);
     });
   });
 
   TestParser.Case({
-    case: '1.0',
-    description: 'parser.reset()',
+    case: "1.0",
+    description: "parser.reset()",
     given: {
       parser: new IntegerParser({
         schema: {
-          type: 'integer',
+          type: "integer",
           minimum: 0,
           maximum: 10,
           multipleOf: 2
@@ -117,12 +117,12 @@ describe('parsers/IntegerParser', () => {
   });
 
   TestParser.Case({
-    case: '2.0',
-    description: 'parser.clear()',
+    case: "2.0",
+    description: "parser.clear()",
     given: {
       parser: new IntegerParser({
         schema: {
-          type: 'integer',
+          type: "integer",
           minimum: 0,
           maximum: 10,
           multipleOf: 2

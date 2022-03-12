@@ -1,12 +1,12 @@
-import { NullParser } from '@/parsers/NullParser';
-import { TestParser, Scope } from '../../lib/TestParser';
+import { NullParser } from "@/parsers/NullParser";
+import { TestParser, Scope } from "../../lib/TestParser";
 
-describe('parsers/NullParser', () => {
+describe("parsers/NullParser", () => {
   TestParser.Case({
-    case: '0.0',
+    case: "0.0",
     given: {
       parser: new NullParser({
-        schema: { type: 'null' },
+        schema: { type: "null" },
         model: undefined
       })
     },
@@ -14,8 +14,8 @@ describe('parsers/NullParser', () => {
       parser: {
         field: {
           attrs: {
-            type: ({ value }: Scope) => expect(value).toBe('hidden'),
-            value: ({ value }: Scope) => expect(value).toBe('\u0000')
+            type: ({ value }: Scope) => expect(value).toBe("hidden"),
+            value: ({ value }: Scope) => expect(value).toBe("\u0000")
           },
           value: ({ value }: Scope) => expect(value).toBeNull()
         }
@@ -24,11 +24,11 @@ describe('parsers/NullParser', () => {
   });
 
   TestParser.Case({
-    case: '1.0',
-    description: 'parser.reset()',
+    case: "1.0",
+    description: "parser.reset()",
     given: {
       parser: new NullParser({
-        schema: { type: 'null' },
+        schema: { type: "null" },
         model: null,
         onChange: jest.fn()
       })
@@ -56,11 +56,11 @@ describe('parsers/NullParser', () => {
   });
 
   TestParser.Case({
-    case: '2.0',
-    description: 'parser.clear()',
+    case: "2.0",
+    description: "parser.clear()",
     given: {
       parser: new NullParser({
-        schema: { type: 'null' },
+        schema: { type: "null" },
         model: null,
         onChange: jest.fn()
       })

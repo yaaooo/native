@@ -1,13 +1,13 @@
-import { VNode, VNodeData } from 'vue';
-import { FieldElement } from '@/components/FieldElement';
-import { FieldsetElement } from '@/components/FieldsetElement';
-import { ArrayComponent } from '../../types';
+import { VNode, VNodeData } from "vue";
+import { FieldElement } from "@/components/FieldElement";
+import { FieldsetElement } from "@/components/FieldsetElement";
+import { ArrayComponent } from "../../types";
 
 export const ArrayElement: ArrayComponent = {
-  name: 'ArrayElement',
+  name: "ArrayElement",
   functional: true,
   render(h, { data, props }): VNode | VNode[] {
-    const ArrayButtonElement = props.field.descriptor.components.get('button');
+    const ArrayButtonElement = props.field.descriptor.components.get("button");
     const nodes = props.field.children.map((childField) => {
       const childDescriptor = childField.descriptor;
       const buttonsWrapper: VNode[] = [];
@@ -24,16 +24,16 @@ export const ArrayElement: ArrayComponent = {
             props: { button, field: childField }
           }));
 
-          buttonsWrapper.push(h('div', {
+          buttonsWrapper.push(h("div", {
             key: props.field.key + childField.key,
             attrs: {
-              'data-fs-buttons': buttonsNodes.length
+              "data-fs-buttons": buttonsNodes.length
             }
           }, buttonsNodes));
         }
       }
 
-      if (childDescriptor.kind === 'object') {
+      if (childDescriptor.kind === "object") {
         const componentNode = h(FieldsetElement, childData);
         const fieldsetData = {
           props: {

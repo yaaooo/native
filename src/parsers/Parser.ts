@@ -1,9 +1,9 @@
-import { UniqueId } from '@/lib/UniqueId';
-import { Value } from '@/lib/Value';
-import { Objects } from '@/lib/Objects';
+import { UniqueId } from "@/lib/UniqueId";
+import { Value } from "@/lib/Value";
+import { Objects } from "@/lib/Objects";
 
-import { UIDescriptor } from '@/descriptors/UIDescriptor';
-import { JsonSchema } from '../../types/jsonschema';
+import { UIDescriptor } from "@/descriptors/UIDescriptor";
+import { JsonSchema } from "../../types/jsonschema";
 
 import {
   ParserOptions,
@@ -17,7 +17,7 @@ import {
   IUIDescriptor,
   Message,
   DescriptorDefinition
-} from '../../types';
+} from "../../types";
 
 const PARSERS: Dict<any> = {};
 
@@ -43,12 +43,12 @@ export abstract class Parser<
 
   static kind(schema: JsonSchema): FieldKind {
     return schema.enum
-      ? schema.enum.length > 4 ? 'list' : 'enum'
+      ? schema.enum.length > 4 ? "list" : "enum"
       : schema.type;
   }
 
   static get(options: ParserOptions<any, any>, parent?: UnknowParser): UnknowParser | null {
-    if (typeof options.schema.type === 'undefined') {
+    if (typeof options.schema.type === "undefined") {
       return null;
     }
 
@@ -111,8 +111,8 @@ export abstract class Parser<
          * attribute to assistive technology
          * @see https://www.w3.org/WAI/tutorials/forms/validation/#validating-required-input
          */
-        get 'aria-required'() {
-          return this.required ? 'true' : undefined;
+        get "aria-required"() {
+          return this.required ? "true" : undefined;
         }
       },
       get value() {
@@ -156,13 +156,13 @@ export abstract class Parser<
   }
 
   get initialValue(): TModel | unknown {
-    return typeof this.options.model === 'undefined'
+    return typeof this.options.model === "undefined"
       ? this.schema.const || this.schema.default
       : this.options.model;
   }
 
   isEmpty(data: unknown = this.model): boolean {
-    return typeof data === 'undefined';
+    return typeof data === "undefined";
   }
 
   parseValue(data: unknown): unknown {
@@ -183,13 +183,15 @@ export abstract class Parser<
   }
 
   commit(): void {
-    if (typeof this.options.onChange === 'function') {
+    if (typeof this.options.onChange === "function") {
       this.options.onChange(this.model, this.field);
     }
   }
 
   requestRender(fields?: UnknowField[]): void {
-    if (typeof this.root.options.requestRender === 'function') {
+    console.log("[LOG] fields", "fields");
+
+    if (typeof this.root.options.requestRender === "function") {
       if (!fields) {
         this.field.key = UniqueId.get(this.options.name);
         fields = [ this.field ];

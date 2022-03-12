@@ -1,6 +1,6 @@
-import { UIDescriptor } from '@/descriptors/UIDescriptor';
-import { ListDescriptor, ListField, ListFieldItemDescriptor, UnknowField, IListDescriptor } from '../../types';
-import { ItemUIDescriptor } from './ItemUIDescriptor';
+import { UIDescriptor } from "@/descriptors/UIDescriptor";
+import { ListDescriptor, ListField, ListFieldItemDescriptor, UnknowField, IListDescriptor } from "../../types";
+import { ItemUIDescriptor } from "./ItemUIDescriptor";
 
 export class ListUIDescriptor extends ItemUIDescriptor<ListField, UnknowField, ListDescriptor> implements IListDescriptor {
   readonly options: ListFieldItemDescriptor[] = [];
@@ -15,7 +15,7 @@ export class ListUIDescriptor extends ItemUIDescriptor<ListField, UnknowField, L
     return [
       {
         label: this.props.placeholder as any,
-        value: '',
+        value: "",
         selected: false
       },
       ...field.items.map((item) => ({
@@ -32,4 +32,4 @@ export class ListUIDescriptor extends ItemUIDescriptor<ListField, UnknowField, L
   }
 }
 
-UIDescriptor.register('list', ListUIDescriptor);
+UIDescriptor.register("list", ListUIDescriptor);

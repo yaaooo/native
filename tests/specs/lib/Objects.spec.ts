@@ -1,8 +1,8 @@
-import { Objects } from '@/lib/Objects';
+import { Objects } from "@/lib/Objects";
 
-describe('lib/Objects', () => {
-  describe('Objects.isObject(value)', () => {
-    [ 'hello', 123, true, undefined, null, [], () => { return 1; } ].forEach((value) => {
+describe("lib/Objects", () => {
+  describe("Objects.isObject(value)", () => {
+    [ "hello", 123, true, undefined, null, [], () => { return 1; } ].forEach((value) => {
       it(`should return false for '${value}' as scalar value`, () => {
         expect(Objects.isObject(value)).toBeFalsy();
       });
@@ -15,8 +15,8 @@ describe('lib/Objects', () => {
     });
   });
 
-  describe('Objects.assign(dest, src)', () => {
-    it('should successfully merge src object to the dest object', () => {
+  describe("Objects.assign(dest, src)", () => {
+    it("should successfully merge src object to the dest object", () => {
       const F = function F() { return 0; };
 
       const src = {
@@ -35,8 +35,8 @@ describe('lib/Objects', () => {
     });
   });
 
-  describe('Objects.clone(object)', () => {
-    it('should successfully clone object', () => {
+  describe("Objects.clone(object)", () => {
+    it("should successfully clone object", () => {
       const F = function F() { return 0; };
 
       const src = {
@@ -53,7 +53,7 @@ describe('lib/Objects', () => {
       expect(result).toEqual(expected);
     });
 
-    it('should successfully clone array', () => {
+    it("should successfully clone array", () => {
       const src = [
         { x: 1 },
         { y: 2 }
@@ -70,17 +70,17 @@ describe('lib/Objects', () => {
       expect(result).toEqual(expected);
     });
 
-    it('should successfully clone scalar value', () => {
+    it("should successfully clone scalar value", () => {
       expect(Objects.clone(12)).toBe(12);
     });
   });
 
-  describe('Objects.isEmpty(object)', () => {
-    it('should return true with an empty object', () => {
+  describe("Objects.isEmpty(object)", () => {
+    it("should return true with an empty object", () => {
       expect(Objects.isEmpty({})).toBeTruthy();
     });
 
-    it('should return false with a non empty object', () => {
+    it("should return false with a non empty object", () => {
       const F = function F() { return 0; };
       const object = {
         a: 1, c: 2, e: { x: 1 }, d: [ 1 ], f: { g: 1 }, F
@@ -90,8 +90,8 @@ describe('lib/Objects', () => {
     });
   });
 
-  describe('Objects.clear(object)', () => {
-    it('should clear an empty object', () => {
+  describe("Objects.clear(object)", () => {
+    it("should clear an empty object", () => {
       const object = {};
 
       Objects.clear(object);
@@ -99,7 +99,7 @@ describe('lib/Objects', () => {
       expect(object).toEqual({});
     });
 
-    it('should delete all properties', () => {
+    it("should delete all properties", () => {
       const F = function F() { return 0; };
       const object = {
         a: 1, c: 2, e: { x: 1 }, d: [ 1 ], f: { g: 1 }, F

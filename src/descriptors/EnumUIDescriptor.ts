@@ -1,9 +1,9 @@
-import { UIDescriptor } from '@/descriptors/UIDescriptor';
-import { Components } from '@/lib/Components';
-import { EnumField, RadioField, IEnumItemDescriptor, EnumDescriptor, Component, ScalarKind } from '../../types';
-import { ItemUIDescriptor } from './ItemUIDescriptor';
+import { UIDescriptor } from "@/descriptors/UIDescriptor";
+import { Components } from "@/lib/Components";
+import { EnumField, RadioField, IEnumItemDescriptor, EnumDescriptor, Component, ScalarKind } from "../../types";
+import { ItemUIDescriptor } from "./ItemUIDescriptor";
 
-const DEFAULT_KIND: ScalarKind = 'radio';
+const DEFAULT_KIND: ScalarKind = "radio";
 
 export class EnumUIDescriptor extends ItemUIDescriptor<EnumField, RadioField, EnumDescriptor> {
   readonly layout: Component;
@@ -12,7 +12,7 @@ export class EnumUIDescriptor extends ItemUIDescriptor<EnumField, RadioField, En
   constructor(options: EnumDescriptor, field: Readonly<EnumField>, components: Components) {
     super(options, field, components);
 
-    this.layout = options.layout || 'fieldset';
+    this.layout = options.layout || "fieldset";
   }
 
   getChildren(field: Readonly<EnumField>): IEnumItemDescriptor[] {
@@ -36,4 +36,4 @@ export class EnumUIDescriptor extends ItemUIDescriptor<EnumField, RadioField, En
   }
 }
 
-UIDescriptor.register('enum', EnumUIDescriptor);
+UIDescriptor.register("enum", EnumUIDescriptor);

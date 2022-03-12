@@ -1,8 +1,8 @@
-import { Parser } from '@/parsers/Parser';
-import { SetParser } from '@/parsers/SetParser';
-import { UniqueId } from '@/lib/UniqueId';
-import { EnumUIDescriptor } from '@/descriptors/EnumUIDescriptor';
-import { JsonSchema } from '../../types/jsonschema';
+import { Parser } from "@/parsers/Parser";
+import { SetParser } from "@/parsers/SetParser";
+import { UniqueId } from "@/lib/UniqueId";
+import { EnumUIDescriptor } from "@/descriptors/EnumUIDescriptor";
+import { JsonSchema } from "../../types/jsonschema";
 
 import {
   EnumField,
@@ -11,13 +11,13 @@ import {
   UnknowParser,
   EnumDescriptor,
   Dict
-} from '../../types';
+} from "../../types";
 
 export class EnumParser extends SetParser<unknown, EnumField, EnumDescriptor, EnumUIDescriptor> {
   childrenParsers: UnknowParser[] = [];
 
   constructor(options: ParserOptions<unknown, EnumField, EnumDescriptor>, parent?: UnknowParser) {
-    super('enum', options, parent);
+    super("enum", options, parent);
   }
 
   get fields(): Dict<RadioField> {
@@ -49,7 +49,7 @@ export class EnumParser extends SetParser<unknown, EnumField, EnumDescriptor, En
         const parser = Parser.get({
           id: `${radioId}-${UniqueId.parse(item)}`,
           name: radioName,
-          kind: 'radio',
+          kind: "radio",
           schema: itemSchema,
           model: itemSchema.default,
           descriptor: descriptorItems[item],
@@ -96,7 +96,7 @@ export class EnumParser extends SetParser<unknown, EnumField, EnumDescriptor, En
       itemField.attrs.checked = itemField.value === this.model;
 
       if (itemField.attrs.checked) {
-        itemField.descriptor.attrs.checked = 'checked';
+        itemField.descriptor.attrs.checked = "checked";
       }
     }
   }
@@ -109,4 +109,4 @@ export class EnumParser extends SetParser<unknown, EnumField, EnumDescriptor, En
   }
 }
 
-SetParser.register('enum', EnumParser);
+SetParser.register("enum", EnumParser);

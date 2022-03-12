@@ -1,26 +1,26 @@
-import { ObjectParser } from '@/parsers/ObjectParser';
-import { TestParser, Scope } from '../../lib/TestParser';
+import { ObjectParser } from "@/parsers/ObjectParser";
+import { TestParser, Scope } from "../../lib/TestParser";
 
-describe('descriptors/ObjectDescriptor', () => {
+describe("descriptors/ObjectDescriptor", () => {
   TestParser.Case({
-    case: '1.0',
-    description: 'basic parsing',
+    case: "1.0",
+    description: "basic parsing",
     given: {
       parser: new ObjectParser({
         schema: {
-          type: 'object',
+          type: "object",
           properties: {
-            name: { type: 'string' }
+            name: { type: "string" }
           },
-          required: [ 'name' ]
+          required: [ "name" ]
         },
-        model: { name: 'Jon Snow' },
-        name: 'profile'
+        model: { name: "Jon Snow" },
+        name: "profile"
       })
     },
     expected: {
       parser: {
-        kind: ({ value }: Scope) => expect(value).toBe('object'),
+        kind: ({ value }: Scope) => expect(value).toBe("object"),
         fields({ value }: Scope) {
           for (const key in value) {
             expect(value[key].property).toBe(key);
@@ -28,7 +28,7 @@ describe('descriptors/ObjectDescriptor', () => {
           }
         },
         field: {
-          value: ({ value }: Scope) => expect(value).toEqual({ name: 'Jon Snow' }),
+          value: ({ value }: Scope) => expect(value).toEqual({ name: "Jon Snow" }),
           attrs: {
             name: ({ value }: Scope) => expect(value).toBeUndefined(),
             required: ({ value }: Scope) => expect(value).toBeUndefined()

@@ -1,7 +1,7 @@
-import { UIDescriptor } from '@/descriptors/UIDescriptor';
-import { Components } from '@/lib/Components';
-import { Objects } from '@/lib/Objects';
-import { UniqueId } from '@/lib/UniqueId';
+import { UIDescriptor } from "@/descriptors/UIDescriptor";
+import { Components } from "@/lib/Components";
+import { Objects } from "@/lib/Objects";
+import { UniqueId } from "@/lib/UniqueId";
 
 import {
   Dict,
@@ -13,7 +13,7 @@ import {
   IObjectGroupItem,
   Component,
   ObjectFieldChild
-} from '../../types';
+} from "../../types";
 
 type ObjectChild = {
   id: string;
@@ -34,7 +34,7 @@ export class ObjectUIDescriptor extends UIDescriptor<ObjectField, ObjectDescript
   constructor(options: ObjectDescriptor, field: Readonly<ObjectField>, components: Components) {
     super(options, field, components);
 
-    this.layout = options.layout || 'fieldset';
+    this.layout = options.layout || "fieldset";
     this.schemaProperties = field.schema.properties || {};
     this.properties = options.properties || {};
     this.groups = options.groups || {};
@@ -156,4 +156,4 @@ export class ObjectUIDescriptor extends UIDescriptor<ObjectField, ObjectDescript
   }
 }
 
-UIDescriptor.register('object', ObjectUIDescriptor);
+UIDescriptor.register("object", ObjectUIDescriptor);

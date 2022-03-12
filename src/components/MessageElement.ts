@@ -1,18 +1,18 @@
-import { VNode } from 'vue';
-import { MessageComponent } from '../../types';
+import { VNode } from "vue";
+import { MessageComponent } from "../../types";
 
 export const MessageElement: MessageComponent = {
   functional: true,
-  name: 'MessageElement',
+  name: "MessageElement",
   render(h, { props }): VNode | VNode[] {
-    return h('div', {
+    return h("div", {
       attrs: {
-        'data-fs-message': props.type
+        "data-fs-message": props.type
       }
     }, [
-      h('span', {
+      h("span", {
         attrs: {
-          'data-fs-message-text': true
+          "data-fs-message-text": true
         }
       }, props.text)
     ]);

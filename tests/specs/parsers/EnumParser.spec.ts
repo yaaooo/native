@@ -1,31 +1,31 @@
-import { EnumParser } from '@/parsers/EnumParser';
-import { TestParser, Scope } from '../../lib/TestParser';
+import { EnumParser } from "@/parsers/EnumParser";
+import { TestParser, Scope } from "../../lib/TestParser";
 
-import '@/parsers';
+import "@/parsers";
 
-describe('parsers/EnumParser', () => {
+describe("parsers/EnumParser", () => {
   TestParser.Case({
-    case: '1.0',
-    description: 'parser.reset()',
+    case: "1.0",
+    description: "parser.reset()",
     given: {
       parser: new EnumParser({
         schema: {
-          type: 'string',
-          enum: [ 'jon', 'arya', 'bran', 'ned' ]
+          type: "string",
+          enum: [ "jon", "arya", "bran", "ned" ]
         },
-        model: 'jon'
+        model: "jon"
       })
     },
     expected: {
       parser: {
-        kind: ({ value }: Scope) => expect(value).toBe('enum'),
+        kind: ({ value }: Scope) => expect(value).toBe("enum"),
         field: {
-          value: 'jon',
+          value: "jon",
           fields({ parser }: Scope) {
             // fields should be defined
             const models = Object.keys(parser.field.fields);
 
-            expect(models).toEqual([ 'jon', 'arya', 'bran', 'ned' ]);
+            expect(models).toEqual([ "jon", "arya", "bran", "ned" ]);
 
             // fields's field.attrs.checked should be defined
             const checkStates = models.map((key) => parser.field.fields[key].attrs.checked);
@@ -34,11 +34,11 @@ describe('parsers/EnumParser', () => {
           },
           setValue({ parser }: Scope<EnumParser>) {
             // field.value should be equal to the updated value using field.setValue()
-            parser.field.setValue('arya');
-            expect(parser.field.value).toBe('arya');
+            parser.field.setValue("arya");
+            expect(parser.field.value).toBe("arya");
 
             // field.attrs.checked should be updated when using field.setValue()
-            parser.field.setValue('bran');
+            parser.field.setValue("bran");
 
             const models = Object.keys(parser.field.fields);
             const checkStates = models.map((key) => parser.field.fields[key].attrs.checked);
@@ -49,7 +49,7 @@ describe('parsers/EnumParser', () => {
             const childField: any = parser.field.fields[models.slice(-1).pop() as any];
 
             childField.setValue(childField.value);
-            expect(parser.field.value).toBe('ned');
+            expect(parser.field.value).toBe("ned");
           }
         }
       }
@@ -57,34 +57,34 @@ describe('parsers/EnumParser', () => {
   });
 
   TestParser.Case({
-    case: '2.0',
-    description: 'should successfully parse default value',
+    case: "2.0",
+    description: "should successfully parse default value",
     given: {
       parser: new EnumParser({
         schema: {
-          type: 'string',
-          enum: [ 'jon', 'arya', 'tyrion' ],
-          default: 'arya'
+          type: "string",
+          enum: [ "jon", "arya", "tyrion" ],
+          default: "arya"
         },
         model: undefined
       })
     },
     expected: {
       parser: {
-        model: ({ value }: Scope) => expect(value).toBe('arya'),
+        model: ({ value }: Scope) => expect(value).toBe("arya"),
         field: {
-          value: ({ value }: Scope) => expect(value).toBe('arya')
+          value: ({ value }: Scope) => expect(value).toBe("arya")
         }
       }
     }
   });
 
   TestParser.Case({
-    case: '2.1',
-    description: 'field.value should parse default undefined as an undefined model',
+    case: "2.1",
+    description: "field.value should parse default undefined as an undefined model",
     given: {
       parser: new EnumParser({
-        schema: { type: 'string', enum: [ 'jon', 'arya' ] },
+        schema: { type: "string", enum: [ "jon", "arya" ] },
         model: undefined
       })
     },
@@ -98,11 +98,11 @@ describe('parsers/EnumParser', () => {
   });
 
   TestParser.Case({
-    case: '2.2',
-    description: 'field.fields should be empty with missing schema.enum',
+    case: "2.2",
+    description: "field.fields should be empty with missing schema.enum",
     given: {
       parser: new EnumParser({
-        schema: { type: 'string' },
+        schema: { type: "string" },
         model: undefined
       })
     },
@@ -116,22 +116,22 @@ describe('parsers/EnumParser', () => {
   });
 
   TestParser.Case({
-    case: '2.3',
-    description: 'field.fields should be defined with provided field.descriptor.items',
+    case: "2.3",
+    description: "field.fields should be defined with provided field.descriptor.items",
     given: {
       parser: new EnumParser({
         schema: {
-          type: 'string',
-          enum: [ 'jon', 'arya' ]
+          type: "string",
+          enum: [ "jon", "arya" ]
         },
-        model: 'jon',
+        model: "jon",
         descriptor: {
           items: {
             jon: {
-              label: 'Jon Snow'
+              label: "Jon Snow"
             },
             arya: {
-              label: 'Arya Stark'
+              label: "Arya Stark"
             }
           }
         }
@@ -141,28 +141,28 @@ describe('parsers/EnumParser', () => {
       parser: {
         fields: {
           jon: {
-            value: ({ value }: Scope) => expect(value).toBe('jon')
+            value: ({ value }: Scope) => expect(value).toBe("jon")
           },
           arya: {
-            value: ({ value }: Scope) => expect(value).toBe('arya')
+            value: ({ value }: Scope) => expect(value).toBe("arya")
           }
         },
         field: {
           fields: {
             jon: {
-              value: ({ value }: Scope) => expect(value).toBe('jon')
+              value: ({ value }: Scope) => expect(value).toBe("jon")
             },
             arya: {
-              value: ({ value }: Scope) => expect(value).toBe('arya')
+              value: ({ value }: Scope) => expect(value).toBe("arya")
             }
           },
           descriptor: {
             children: [
               {
-                label: ({ value }: Scope) => expect(value).toBe('Jon Snow')
+                label: ({ value }: Scope) => expect(value).toBe("Jon Snow")
               },
               {
-                label: ({ value }: Scope) => expect(value).toBe('Arya Stark')
+                label: ({ value }: Scope) => expect(value).toBe("Arya Stark")
               }
             ]
           }
@@ -172,15 +172,15 @@ describe('parsers/EnumParser', () => {
   });
 
   TestParser.Case({
-    case: '3.0',
-    description: 'parser.reset()',
+    case: "3.0",
+    description: "parser.reset()",
     given: {
       parser: new EnumParser({
         schema: {
-          type: 'string',
-          enum: [ 'jon', 'arya', 'bran', 'ned' ]
+          type: "string",
+          enum: [ "jon", "arya", "bran", "ned" ]
         },
-        model: 'arya',
+        model: "arya",
         onChange: jest.fn()
       })
     },
@@ -189,12 +189,12 @@ describe('parsers/EnumParser', () => {
         reset({ parser }: Scope) {
           const onChange = parser.options.onChange;
           const expected = [
-            'arya',
-            'jon'
+            "arya",
+            "jon"
           ];
 
-          expect(parser.rawValue).toEqual('arya');
-          expect(parser.model).toEqual('arya');
+          expect(parser.rawValue).toEqual("arya");
+          expect(parser.model).toEqual("arya");
           expect(onChange.mock.calls.length).toBe(1);
           expect(onChange.mock.calls[0][0]).toEqual(expected[0]);
 
@@ -202,15 +202,15 @@ describe('parsers/EnumParser', () => {
 
           expect(onChange.mock.calls.length).toBe(2);
           expect(onChange.mock.calls[1][0]).toEqual(expected[1]);
-          expect(parser.rawValue).toEqual('jon');
-          expect(parser.model).toEqual('jon');
+          expect(parser.rawValue).toEqual("jon");
+          expect(parser.model).toEqual("jon");
 
           parser.reset(); // reset without calling onChange
 
           expect(onChange.mock.calls.length).toBe(2);
-          expect(parser.initialValue).toEqual('arya');
-          expect(parser.rawValue).toEqual('arya');
-          expect(parser.model).toEqual('arya');
+          expect(parser.initialValue).toEqual("arya");
+          expect(parser.rawValue).toEqual("arya");
+          expect(parser.model).toEqual("arya");
 
           parser.field.reset(); // reset with calling onChange
 
@@ -222,15 +222,15 @@ describe('parsers/EnumParser', () => {
   });
 
   TestParser.Case({
-    case: '4.0',
-    description: 'parser.clear()',
+    case: "4.0",
+    description: "parser.clear()",
     given: {
       parser: new EnumParser({
         schema: {
-          type: 'string',
-          enum: [ 'jon', 'arya', 'bran', 'ned' ]
+          type: "string",
+          enum: [ "jon", "arya", "bran", "ned" ]
         },
-        model: 'arya',
+        model: "arya",
         onChange: jest.fn()
       })
     },
@@ -239,17 +239,17 @@ describe('parsers/EnumParser', () => {
         clear({ parser }: Scope) {
           const onChange = parser.options.onChange;
 
-          expect(parser.rawValue).toEqual('arya');
-          expect(parser.model).toEqual('arya');
+          expect(parser.rawValue).toEqual("arya");
+          expect(parser.model).toEqual("arya");
           expect(onChange.mock.calls.length).toBe(1);
-          expect(onChange.mock.calls[0][0]).toEqual('arya');
+          expect(onChange.mock.calls[0][0]).toEqual("arya");
 
           parser.field.fields.jon.setValue(true);
 
           expect(onChange.mock.calls.length).toBe(2);
-          expect(onChange.mock.calls[1][0]).toEqual('jon');
-          expect(parser.rawValue).toEqual('jon');
-          expect(parser.model).toEqual('jon');
+          expect(onChange.mock.calls[1][0]).toEqual("jon");
+          expect(parser.rawValue).toEqual("jon");
+          expect(parser.model).toEqual("jon");
 
           parser.clear(); // clear without calling onChange
 

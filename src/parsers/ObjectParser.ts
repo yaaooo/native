@@ -1,11 +1,11 @@
-import { Parser } from '@/parsers/Parser';
-import { SetParser } from '@/parsers/SetParser';
-import { UniqueId } from '@/lib/UniqueId';
-import { Objects } from '@/lib/Objects';
-import { Value } from '@/lib/Value';
+import { Parser } from "@/parsers/Parser";
+import { SetParser } from "@/parsers/SetParser";
+import { UniqueId } from "@/lib/UniqueId";
+import { Objects } from "@/lib/Objects";
+import { Value } from "@/lib/Value";
 
-import { ObjectUIDescriptor } from '@/descriptors/ObjectUIDescriptor';
-import { JsonSchema } from '../../types/jsonschema';
+import { ObjectUIDescriptor } from "@/descriptors/ObjectUIDescriptor";
+import { JsonSchema } from "../../types/jsonschema";
 
 import {
   Dict,
@@ -15,7 +15,7 @@ import {
   UnknowParser,
   ObjectDescriptor,
   UnknowField
-} from '../../types';
+} from "../../types";
 
 export class ObjectParser extends SetParser<Dict, ObjectField, ObjectDescriptor, ObjectUIDescriptor> {
   properties: Dict<JsonSchema> = {};
@@ -24,7 +24,7 @@ export class ObjectParser extends SetParser<Dict, ObjectField, ObjectDescriptor,
   readonly initialSchema: JsonSchema;
 
   constructor(options: ParserOptions<Dict, ObjectField, ObjectDescriptor>, parent?: UnknowParser) {
-    super('object', options, parent);
+    super("object", options, parent);
 
     this.initialSchema = Objects.clone(this.schema);
   }
@@ -185,7 +185,7 @@ export class ObjectParser extends SetParser<Dict, ObjectField, ObjectDescriptor,
      * attributes `required` and `aria-required` are not applicable here
      */
     delete this.field.attrs.required;
-    delete this.field.attrs['aria-required'];
+    delete this.field.attrs["aria-required"];
 
     if (this.isRoot) {
       /**
@@ -324,4 +324,4 @@ export class ObjectParser extends SetParser<Dict, ObjectField, ObjectDescriptor,
   }
 }
 
-Parser.register('object', ObjectParser);
+Parser.register("object", ObjectParser);

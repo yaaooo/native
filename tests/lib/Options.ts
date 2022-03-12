@@ -1,4 +1,4 @@
-import { Parser } from '@/parsers/Parser';
+import { Parser } from "@/parsers/Parser";
 
 import {
   ParserOptions,
@@ -6,10 +6,10 @@ import {
   UnknowField,
   IUIDescriptor,
   UnknowParser
-} from '../../types';
+} from "../../types";
 
-import '@/parsers';
-import '@/descriptors';
+import "@/parsers";
+import "@/descriptors";
 
 export interface GetOptions extends ParserOptions<any, any> {
   descriptor?: DescriptorInstance;
@@ -35,7 +35,7 @@ export const Options = {
     const parser = Parser.get(options);
 
     if (parser === null) {
-      throw new Error('Parser cannot be null');
+      throw new Error("Parser cannot be null");
     }
 
     const { field } = parser;

@@ -1,13 +1,13 @@
-import { Dict, Component, ComponentsType, IComponents } from '../../types';
+import { Dict, Component, ComponentsType, IComponents } from "../../types";
 
 export class Components implements IComponents {
   readonly $: Dict<Component>;
 
   constructor () {
     this.$ = {
-      form: 'form',
-      message: 'div',
-      default: 'input'
+      form: "form",
+      message: "div",
+      default: "input"
     };
   }
 

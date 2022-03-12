@@ -1,11 +1,11 @@
-import { Dict } from '../../types';
-import { JsonSchema } from '../../types/jsonschema';
+import { Dict } from "../../types";
+import { JsonSchema } from "../../types/jsonschema";
 
 export const Value = {
   parseValue(data: unknown, { type }: JsonSchema): unknown {
     if (this.hasOwnProperty(type)) {
-      if (type === 'boolean' && typeof data === 'string') {
-        data = data === 'true';
+      if (type === "boolean" && typeof data === "string") {
+        data = data === "true";
       }
 
       return (Value as any)[type](data);
@@ -35,11 +35,11 @@ export const Value = {
     return data as any || {};
   },
   string(data: unknown): string | undefined {
-    return typeof data !== 'undefined' ? `${data}` : undefined;
+    return typeof data !== "undefined" ? `${data}` : undefined;
   },
   array(data: unknown[]): unknown[] {
     return data instanceof Array
-      ? data.filter((item) => typeof item !== 'undefined')
+      ? data.filter((item) => typeof item !== "undefined")
       : [];
   }
 };

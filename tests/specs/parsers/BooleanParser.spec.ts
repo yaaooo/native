@@ -1,12 +1,12 @@
-import { BooleanParser } from '@/parsers/BooleanParser';
-import { TestParser, Scope } from '../../lib/TestParser';
+import { BooleanParser } from "@/parsers/BooleanParser";
+import { TestParser, Scope } from "../../lib/TestParser";
 
-describe('parsers/BooleanParser', () => {
+describe("parsers/BooleanParser", () => {
   TestParser.Case({
-    case: '0.0',
+    case: "0.0",
     given: {
       parser: new BooleanParser({
-        schema: { type: 'boolean' },
+        schema: { type: "boolean" },
         model: undefined
       })
     },
@@ -14,7 +14,7 @@ describe('parsers/BooleanParser', () => {
       parser: {
         field: {
           attrs: {
-            type: ({ value }: Scope) => expect(value).toBe('checkbox'),
+            type: ({ value }: Scope) => expect(value).toBe("checkbox"),
             checked: ({ value }: Scope) => expect(value).toBeFalsy()
           },
           value: ({ value }: Scope) => expect(value).toBeFalsy()
@@ -23,9 +23,9 @@ describe('parsers/BooleanParser', () => {
     }
   });
 
-  it('should successfully parse default truthy boolean value', () => {
+  it("should successfully parse default truthy boolean value", () => {
     const parser = new BooleanParser({
-      schema: { type: 'boolean' },
+      schema: { type: "boolean" },
       model: true
     });
 
@@ -34,9 +34,9 @@ describe('parsers/BooleanParser', () => {
     expect(parser.field.value).toBeTruthy();
   });
 
-  it('field.value should successfully parse default falsy boolean value', () => {
+  it("field.value should successfully parse default falsy boolean value", () => {
     const parser = new BooleanParser({
-      schema: { type: 'boolean' },
+      schema: { type: "boolean" },
       model: false
     });
 
@@ -45,9 +45,9 @@ describe('parsers/BooleanParser', () => {
     expect(parser.field.value).toBeFalsy();
   });
 
-  it('field.value should parse default non boolean value as a falsy model', () => {
+  it("field.value should parse default non boolean value as a falsy model", () => {
     const parser = new BooleanParser({
-      schema: { type: 'boolean' },
+      schema: { type: "boolean" },
       model: 12 as any
     });
 
@@ -57,26 +57,26 @@ describe('parsers/BooleanParser', () => {
   });
 
   TestParser.Case({
-    case: '1.0',
-    description: 'isEmpty() with non boolean',
+    case: "1.0",
+    description: "isEmpty() with non boolean",
     given: {
       parser: new BooleanParser({
-        schema: { type: 'boolean' }
+        schema: { type: "boolean" }
       })
     },
     expected: {
       parser: {
-        isEmpty: ({ parser }: Scope) => expect(parser.isEmpty('false')).toBeTruthy()
+        isEmpty: ({ parser }: Scope) => expect(parser.isEmpty("false")).toBeTruthy()
       }
     }
   });
 
   TestParser.Case({
-    case: '1.1',
-    description: 'isEmpty() with a falsy boolean',
+    case: "1.1",
+    description: "isEmpty() with a falsy boolean",
     given: {
       parser: new BooleanParser({
-        schema: { type: 'boolean' }
+        schema: { type: "boolean" }
       })
     },
     expected: {
@@ -87,11 +87,11 @@ describe('parsers/BooleanParser', () => {
   });
 
   TestParser.Case({
-    case: '1.2',
-    description: 'isEmpty() with a truthy boolean',
+    case: "1.2",
+    description: "isEmpty() with a truthy boolean",
     given: {
       parser: new BooleanParser({
-        schema: { type: 'boolean' }
+        schema: { type: "boolean" }
       })
     },
     expected: {
@@ -102,11 +102,11 @@ describe('parsers/BooleanParser', () => {
   });
 
   TestParser.Case({
-    case: '1.3',
-    description: 'isEmpty() with default value',
+    case: "1.3",
+    description: "isEmpty() with default value",
     given: {
       parser: new BooleanParser({
-        schema: { type: 'boolean', default: true }
+        schema: { type: "boolean", default: true }
       })
     },
     expected: {
@@ -117,11 +117,11 @@ describe('parsers/BooleanParser', () => {
   });
 
   TestParser.Case({
-    case: '1.4',
-    description: 'isEmpty() with non boolean value',
+    case: "1.4",
+    description: "isEmpty() with non boolean value",
     given: {
       parser: new BooleanParser({
-        schema: { type: 'boolean' }
+        schema: { type: "boolean" }
       })
     },
     expected: {
@@ -132,11 +132,11 @@ describe('parsers/BooleanParser', () => {
   });
 
   TestParser.Case({
-    case: '2.0',
-    description: 'parser.reset()',
+    case: "2.0",
+    description: "parser.reset()",
     given: {
       parser: new BooleanParser({
-        schema: { type: 'boolean' },
+        schema: { type: "boolean" },
         model: true,
         onChange: jest.fn()
       })
@@ -169,11 +169,11 @@ describe('parsers/BooleanParser', () => {
   });
 
   TestParser.Case({
-    case: '3.0',
-    description: 'parser.clear()',
+    case: "3.0",
+    description: "parser.clear()",
     given: {
       parser: new BooleanParser({
-        schema: { type: 'boolean' },
+        schema: { type: "boolean" },
         model: false,
         onChange: jest.fn()
       })

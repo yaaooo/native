@@ -1,11 +1,11 @@
-import { SetParser } from '@/parsers/SetParser';
-import { Objects } from '@/lib/Objects';
-import { Arrays } from '@/lib/Arrays';
-import { Value } from '@/lib/Value';
-import { ArrayUIDescriptor } from '@/descriptors/ArrayUIDescriptor';
-import { ArrayField, ParserOptions, FieldKind, ArrayItemField, UnknowParser, ArrayDescriptor } from '../../types';
-import { JsonSchema } from '../../types/jsonschema';
-import { Parser } from './Parser';
+import { SetParser } from "@/parsers/SetParser";
+import { Objects } from "@/lib/Objects";
+import { Arrays } from "@/lib/Arrays";
+import { Value } from "@/lib/Value";
+import { ArrayUIDescriptor } from "@/descriptors/ArrayUIDescriptor";
+import { ArrayField, ParserOptions, FieldKind, ArrayItemField, UnknowParser, ArrayDescriptor } from "../../types";
+import { JsonSchema } from "../../types/jsonschema";
+import { Parser } from "./Parser";
 
 export class ArrayParser extends SetParser<any, ArrayField, ArrayDescriptor, ArrayUIDescriptor> {
   readonly items: JsonSchema[] = [];
@@ -16,7 +16,7 @@ export class ArrayParser extends SetParser<any, ArrayField, ArrayDescriptor, Arr
   childrenParsers: UnknowParser[] = [];
 
   constructor(options: ParserOptions<any, ArrayField, ArrayDescriptor>, parent?: UnknowParser) {
-    super('array', options, parent);
+    super("array", options, parent);
   }
 
   get initialValue(): unknown[] {
@@ -113,10 +113,10 @@ export class ArrayParser extends SetParser<any, ArrayField, ArrayDescriptor, Arr
 
   getFieldItem(itemSchema: JsonSchema, index: number): ArrayItemField | null {
     const kind: FieldKind | undefined = this.field.uniqueItems
-      ? 'boolean'
+      ? "boolean"
       : SetParser.kind(itemSchema);
 
-    const itemModel = typeof this.model[index] === 'undefined'
+    const itemModel = typeof this.model[index] === "undefined"
       ? itemSchema.default
       : this.model[index];
 
@@ -127,7 +127,7 @@ export class ArrayParser extends SetParser<any, ArrayField, ArrayDescriptor, Arr
       : { kind };
 
     const itemName = this.options.name || itemModel;
-    const name = kind === 'enum' && this.radioIndex++
+    const name = kind === "enum" && this.radioIndex++
       ? `${itemName}-${this.radioIndex}`
       : itemName;
 
@@ -148,7 +148,7 @@ export class ArrayParser extends SetParser<any, ArrayField, ArrayDescriptor, Arr
     if (itemParser) {
       this.childrenParsers.push(itemParser);
 
-      if (kind === 'boolean') {
+      if (kind === "boolean") {
         this.parseCheckboxField(itemParser as Parser<any, any, any, any>, itemModel);
       }
 
@@ -275,7 +275,7 @@ export class ArrayParser extends SetParser<any, ArrayField, ArrayDescriptor, Arr
   parseField(): void {
     this.field.sortable = false;
     this.field.minItems = this.schema.minItems || (this.field.required ? 1 : 0);
-    this.field.maxItems = typeof this.schema.maxItems === 'number' && this.schema.maxItems > 0
+    this.field.maxItems = typeof this.schema.maxItems === "number" && this.schema.maxItems > 0
       ? this.schema.maxItems
       : Number.MAX_SAFE_INTEGER;
 
@@ -333,7 +333,7 @@ export class ArrayParser extends SetParser<any, ArrayField, ArrayDescriptor, Arr
   parseCheckboxField(parser: Parser<any, any, any, any>, itemModel: unknown): void {
     const isChecked = this.initialValue.includes(itemModel);
 
-    parser.field.attrs.type = 'checkbox';
+    parser.field.attrs.type = "checkbox";
 
     parser.setValue = (checked: boolean) => {
       parser.rawValue = checked;
@@ -393,4 +393,4 @@ export class ArrayParser extends SetParser<any, ArrayField, ArrayDescriptor, Arr
   }
 }
 
-SetParser.register('array', ArrayParser);
+SetParser.register("array", ArrayParser);

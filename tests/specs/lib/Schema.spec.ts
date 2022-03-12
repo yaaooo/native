@@ -1,9 +1,9 @@
-import { Schema } from '@/lib/Schema';
-import { JsonSchema } from '../../../types/jsonschema';
+import { Schema } from "@/lib/Schema";
+import { JsonSchema } from "../../../types/jsonschema";
 
-describe('lib/Schema', () => {
-  describe('Schema.isScalar(schema)', () => {
-    [ 'boolean', 'integer', 'null', 'number', 'string' ].forEach((type) => {
+describe("lib/Schema", () => {
+  describe("Schema.isScalar(schema)", () => {
+    [ "boolean", "integer", "null", "number", "string" ].forEach((type) => {
       const schema = { type } as JsonSchema;
 
       it(`should validate { type: '${type}' } as scalar schema`, () => {
@@ -11,7 +11,7 @@ describe('lib/Schema', () => {
       });
     });
 
-    [ 'array', 'object' ].forEach((type) => {
+    [ "array", "object" ].forEach((type) => {
       const schema = { type } as JsonSchema;
 
       it(`should validate { type: '${type}' } as non scalar schema`, () => {
@@ -19,7 +19,7 @@ describe('lib/Schema', () => {
       });
     });
 
-    it('should validate empty schema {} as non scalar schema', () => {
+    it("should validate empty schema {} as non scalar schema", () => {
       expect(Schema.isScalar({} as any)).toBe(false);
     });
   });

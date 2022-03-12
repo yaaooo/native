@@ -1,53 +1,53 @@
-import { ListParser } from '@/parsers/ListParser';
-import { Options } from '../../lib/Options';
-import { TestParser, Scope } from '../../lib/TestParser';
+import { ListParser } from "@/parsers/ListParser";
+import { Options } from "../../lib/Options";
+import { TestParser, Scope } from "../../lib/TestParser";
 
-describe('parsers/ListParser', () => {
+describe("parsers/ListParser", () => {
   TestParser.Case({
-    case: '1.0',
-    description: 'with a string schema with default descriptor',
+    case: "1.0",
+    description: "with a string schema with default descriptor",
     given: {
       parser: new ListParser({
         schema: {
-          type: 'string',
-          enum: [ 'jon', 'arya' ]
+          type: "string",
+          enum: [ "jon", "arya" ]
         },
-        model: 'arya'
+        model: "arya"
       })
     },
     expected: {
       parser: {
-        kind: ({ value }: Scope) => expect(value).toBe('list'),
+        kind: ({ value }: Scope) => expect(value).toBe("list"),
         items: ({ value }: Scope) => expect(value).toEqual([
           {
-            value: 'jon',
+            value: "jon",
             selected: false
           },
           {
-            value: 'arya',
+            value: "arya",
             selected: true
           }
         ]),
         field: {
-          value: ({ value }: Scope) => expect(value).toBe('arya'),
+          value: ({ value }: Scope) => expect(value).toBe("arya"),
           items: ({ value, parser }: Scope<ListParser>) => expect(value).toEqual(parser.items),
           descriptor: {
-            kind: ({ value }: Scope) => expect(value).toBe('list'),
+            kind: ({ value }: Scope) => expect(value).toBe("list"),
             options: ({ value }: Scope) => expect(value).toEqual([
               {
-                value: '',
+                value: "",
                 selected: false,
                 label: undefined
               },
               {
-                value: 'jon',
+                value: "jon",
                 selected: false,
-                label: 'jon'
+                label: "jon"
               },
               {
-                value: 'arya',
+                value: "arya",
                 selected: true,
-                label: 'arya'
+                label: "arya"
               }
             ])
           }
@@ -57,23 +57,23 @@ describe('parsers/ListParser', () => {
   });
 
   TestParser.Case({
-    case: '1.1',
-    description: 'with a string schema with custom descriptor kind',
+    case: "1.1",
+    description: "with a string schema with custom descriptor kind",
     given: Options.get({
       schema: {
-        type: 'string',
-        enum: [ 'jon', 'arya' ]
+        type: "string",
+        enum: [ "jon", "arya" ]
       },
-      model: 'arya',
+      model: "arya",
       descriptor: {
-        kind: 'enum'
+        kind: "enum"
       }
     }),
     expected: {
       parser: {
         field: {
           descriptor: {
-            kind: ({ value }: Scope) => expect(value).toBe('enum')
+            kind: ({ value }: Scope) => expect(value).toBe("enum")
           }
         }
       }
@@ -81,12 +81,12 @@ describe('parsers/ListParser', () => {
   });
 
   TestParser.Case({
-    case: '1.2',
-    description: 'with a boolean schema',
+    case: "1.2",
+    description: "with a boolean schema",
     given: {
       parser: new ListParser({
         schema: {
-          type: 'boolean',
+          type: "boolean",
           enum: [ true, false ]
         },
         model: true
@@ -96,11 +96,11 @@ describe('parsers/ListParser', () => {
       parser: {
         items: ({ value }: Scope) => expect(value).toEqual([
           {
-            value: 'true',
+            value: "true",
             selected: true
           },
           {
-            value: 'false',
+            value: "false",
             selected: false
           }
         ]),
@@ -109,19 +109,19 @@ describe('parsers/ListParser', () => {
           descriptor: {
             options: ({ value }: Scope) => expect(value).toEqual([
               {
-                value: '',
+                value: "",
                 selected: false,
                 label: undefined
               },
               {
-                value: 'true',
+                value: "true",
                 selected: true,
-                label: 'true'
+                label: "true"
               },
               {
-                value: 'false',
+                value: "false",
                 selected: false,
-                label: 'false'
+                label: "false"
               }
             ])
           }
@@ -131,12 +131,12 @@ describe('parsers/ListParser', () => {
   });
 
   TestParser.Case({
-    case: '1.3',
-    description: 'with a null schema',
+    case: "1.3",
+    description: "with a null schema",
     given: {
       parser: new ListParser({
         schema: {
-          type: 'null',
+          type: "null",
           enum: [ null, null ]
         },
         model: null
@@ -146,11 +146,11 @@ describe('parsers/ListParser', () => {
       parser: {
         items: ({ value }: Scope) => expect(value).toEqual([
           {
-            value: 'null',
+            value: "null",
             selected: true
           },
           {
-            value: 'null',
+            value: "null",
             selected: true
           }
         ]),
@@ -159,19 +159,19 @@ describe('parsers/ListParser', () => {
           descriptor: {
             options: ({ value }: Scope) => expect(value).toEqual([
               {
-                value: '',
+                value: "",
                 selected: false,
                 label: undefined
               },
               {
-                value: 'null',
+                value: "null",
                 selected: true,
-                label: 'null'
+                label: "null"
               },
               {
-                value: 'null',
+                value: "null",
                 selected: true,
-                label: 'null'
+                label: "null"
               }
             ])
           }
@@ -181,20 +181,20 @@ describe('parsers/ListParser', () => {
   });
 
   TestParser.Case({
-    case: '1.4',
-    description: 'with defined descriptor',
+    case: "1.4",
+    description: "with defined descriptor",
     given: {
       parser: new ListParser({
         schema: {
-          type: 'string',
-          enum: [ 'jon', 'arya' ]
+          type: "string",
+          enum: [ "jon", "arya" ]
         },
         model: undefined,
         descriptor: {
-          kind: 'list',
+          kind: "list",
           items: {
-            jon: { label: 'Jon Snow' },
-            arya: { label: 'Arya Stark' }
+            jon: { label: "Jon Snow" },
+            arya: { label: "Arya Stark" }
           }
         }
       })
@@ -203,11 +203,11 @@ describe('parsers/ListParser', () => {
       parser: {
         items: ({ value }: Scope) => expect(value).toEqual([
           {
-            value: 'jon',
+            value: "jon",
             selected: false
           },
           {
-            value: 'arya',
+            value: "arya",
             selected: false
           }
         ]),
@@ -216,19 +216,19 @@ describe('parsers/ListParser', () => {
           descriptor: {
             options: ({ value }: Scope) => expect(value).toEqual([
               {
-                value: '',
+                value: "",
                 selected: false,
                 label: undefined
               },
               {
-                value: 'jon',
+                value: "jon",
                 selected: false,
-                label: 'Jon Snow'
+                label: "Jon Snow"
               },
               {
-                value: 'arya',
+                value: "arya",
                 selected: false,
-                label: 'Arya Stark'
+                label: "Arya Stark"
               }
             ])
           }
@@ -238,11 +238,11 @@ describe('parsers/ListParser', () => {
   });
 
   TestParser.Case({
-    case: '1.5',
-    description: 'field.items should be empty with missing schema.enum',
+    case: "1.5",
+    description: "field.items should be empty with missing schema.enum",
     given: {
       parser: new ListParser({
-        schema: { type: 'string' },
+        schema: { type: "string" },
         model: undefined
       })
     },
@@ -254,12 +254,12 @@ describe('parsers/ListParser', () => {
   });
 
   TestParser.Case({
-    case: '2.0',
-    description: 'parseValue(data) with truthy boolean',
+    case: "2.0",
+    description: "parseValue(data) with truthy boolean",
     given: {
       parser: new ListParser({
-        schema: { type: 'boolean' },
-        model: 'true'
+        schema: { type: "boolean" },
+        model: "true"
       })
     },
     expected: {
@@ -270,12 +270,12 @@ describe('parsers/ListParser', () => {
   });
 
   TestParser.Case({
-    case: '2.1',
-    description: 'parseValue(data) with falsy boolean',
+    case: "2.1",
+    description: "parseValue(data) with falsy boolean",
     given: {
       parser: new ListParser({
-        schema: { type: 'boolean' },
-        model: 'false'
+        schema: { type: "boolean" },
+        model: "false"
       })
     },
     expected: {
@@ -286,12 +286,12 @@ describe('parsers/ListParser', () => {
   });
 
   TestParser.Case({
-    case: '2.2',
-    description: 'parseValue(data) with invalid boolean',
+    case: "2.2",
+    description: "parseValue(data) with invalid boolean",
     given: {
       parser: new ListParser({
-        schema: { type: 'boolean' },
-        model: 'invalid boolean value'
+        schema: { type: "boolean" },
+        model: "invalid boolean value"
       })
     },
     expected: {
@@ -302,12 +302,12 @@ describe('parsers/ListParser', () => {
   });
 
   TestParser.Case({
-    case: '2.3',
-    description: 'parseValue(data) with integer',
+    case: "2.3",
+    description: "parseValue(data) with integer",
     given: {
       parser: new ListParser({
-        schema: { type: 'integer' },
-        model: '12'
+        schema: { type: "integer" },
+        model: "12"
       })
     },
     expected: {
@@ -318,12 +318,12 @@ describe('parsers/ListParser', () => {
   });
 
   TestParser.Case({
-    case: '2.4',
-    description: 'parseValue(data) with number',
+    case: "2.4",
+    description: "parseValue(data) with number",
     given: {
       parser: new ListParser({
-        schema: { type: 'number' },
-        model: '12.2'
+        schema: { type: "number" },
+        model: "12.2"
       })
     },
     expected: {
@@ -334,47 +334,47 @@ describe('parsers/ListParser', () => {
   });
 
   TestParser.Case({
-    case: '2.5',
-    description: 'parseValue(data) with unknown schema type',
+    case: "2.5",
+    description: "parseValue(data) with unknown schema type",
     given: {
       parser: new ListParser({
-        schema: { type: 'unknown' } as any,
-        model: '12.5'
+        schema: { type: "unknown" } as any,
+        model: "12.5"
       })
     },
     expected: {
       parser: {
-        model: ({ value }: Scope) => expect(value).toBe('12.5')
+        model: ({ value }: Scope) => expect(value).toBe("12.5")
       }
     }
   });
 
   TestParser.Case({
-    case: '3.0',
-    description: 'should successfully parse default value',
+    case: "3.0",
+    description: "should successfully parse default value",
     given: {
       parser: new ListParser({
         schema: {
-          type: 'string',
-          enum: [ 'jon', 'arya' ],
-          default: 'jon'
+          type: "string",
+          enum: [ "jon", "arya" ],
+          default: "jon"
         },
         model: undefined
       })
     },
     expected: {
       parser: {
-        model: ({ value }: Scope) => expect(value).toBe('jon')
+        model: ({ value }: Scope) => expect(value).toBe("jon")
       }
     }
   });
 
   TestParser.Case({
-    case: '3.1',
-    description: 'field.value should parse default undefined as an undefined model',
+    case: "3.1",
+    description: "field.value should parse default undefined as an undefined model",
     given: {
       parser: new ListParser({
-        schema: { type: 'string', enum: [ 'jon', 'arya' ] },
+        schema: { type: "string", enum: [ "jon", "arya" ] },
         model: undefined
       })
     },

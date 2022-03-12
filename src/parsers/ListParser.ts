@@ -1,10 +1,10 @@
-import { Parser } from '@/parsers/Parser';
-import { ListUIDescriptor } from '@/descriptors/ListUIDescriptor';
-import { ListField, ListItemModel, ParserOptions, UnknowParser, ListDescriptor } from '../../types';
+import { Parser } from "@/parsers/Parser";
+import { ListUIDescriptor } from "@/descriptors/ListUIDescriptor";
+import { ListField, ListItemModel, ParserOptions, UnknowParser, ListDescriptor } from "../../types";
 
 export class ListParser extends Parser<unknown, ListField, ListDescriptor, ListUIDescriptor> {
   constructor(options: ParserOptions<unknown, ListField, ListDescriptor>, parent?: UnknowParser) {
-    super('list', options, parent);
+    super("list", options, parent);
   }
 
   get items(): ListItemModel[] {
@@ -22,11 +22,11 @@ export class ListParser extends Parser<unknown, ListField, ListDescriptor, ListU
 
   parseItem(item: unknown): unknown {
     switch (this.schema.type) {
-      case 'boolean':
-        return item === true ? 'true' : 'false';
+      case "boolean":
+        return item === true ? "true" : "false";
 
-      case 'null':
-        return 'null';
+      case "null":
+        return "null";
 
       default:
         return item;
@@ -39,4 +39,4 @@ export class ListParser extends Parser<unknown, ListField, ListDescriptor, ListU
   }
 }
 
-Parser.register('list', ListParser);
+Parser.register("list", ListParser);
