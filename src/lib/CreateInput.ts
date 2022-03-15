@@ -11,6 +11,9 @@ export const CreateInput = <T extends Field<any>>(
   const props = data.props as ElementProps<T>;
 
   return h(tag, {
+    domProps: {
+      value: props.field.value
+    },
     key: props.field.key,
     attrs: props.field.descriptor.attrs,
     on: {

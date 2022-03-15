@@ -189,9 +189,9 @@ export abstract class Parser<
   }
 
   requestRender(fields?: UnknowField[]): void {
-    console.log("[LOG] fields", "fields");
-
     if (typeof this.root.options.requestRender === "function") {
+      // If no fields are passed, default to an array
+      // containing just the current field
       if (!fields) {
         this.field.key = UniqueId.get(this.options.name);
         fields = [ this.field ];
