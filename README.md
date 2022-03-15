@@ -1,8 +1,8 @@
-# FormSchema Native
+# Vue JSON FormSchema
 
-Vue component form based on JSON Schema and Native HTML
+Vue form generator that consumes JSON schema.
 
-[![npm](https://img.shields.io/npm/v/@formschema/native.svg)](https://www.npmjs.com/package/@formschema/native) [![Build status](https://gitlab.com/formschema/native/badges/master/pipeline.svg)](https://gitlab.com/formschema/native/pipelines?ref=master) [![Test coverage](https://gitlab.com/formschema/native/badges/master/coverage.svg)](https://gitlab.com/formschema/native/-/jobs)
+> Please note that this is a fork of [@formschema/native](https://github.com/formschema/native), which was originally authored by [@demsking](https://github.com/demsking).
 
 ## Table of Contents
 
@@ -49,14 +49,8 @@ Vue component form based on JSON Schema and Native HTML
 ## Install
 
 ```sh
-npm install --save @formschema/native
+npm install --save @yaaooo/vue-json-formschema
 ```
-
-## Demo
-
-- [Demo with ElementUI](https://gitlab.com/formschema/components/elementui)
-
-![formschema-demo-elementui](https://gitlab.com/formschema/components/elementui/raw/master/screenshot.png "FormSchema Demo with ElementUI")
 
 ## Usage
 
@@ -68,7 +62,7 @@ npm install --save @formschema/native
 </template>
 
 <script>
-  import FormSchema from '@formschema/native'
+  import FormSchema from '@yaaooo/vue-json-formschema'
   import schema from './schema/newsletter-subscription.json'
 
   export default {
@@ -183,7 +177,7 @@ Get the HTML form object reference.
 </template>
 
 <script>
-  import FormSchema from '@formschema/native'
+  import FormSchema from '@yaaooo/vue-json-formschema'
 
   export default {
     components: { FormSchema },
@@ -217,7 +211,7 @@ object, or `undefined` for input JSON schema object.
 
 <script>
   import axios from 'axios'
-  import FormSchema from '@formschema/native'
+  import FormSchema from '@yaaooo/vue-json-formschema'
 
   export default {
     components: { FormSchema },
@@ -244,7 +238,7 @@ Load an async schema on the `beforeRouterEnter` hook:
 
 <script>
   import axios from 'axios'
-  import FormSchema from '@formschema/native'
+  import FormSchema from '@yaaooo/vue-json-formschema'
 
   export default {
     components: { FormSchema },
@@ -271,7 +265,7 @@ To load a JSON Schema with `$ref` pointers, you need to install an additional de
 
 ```js
 import $RefParser from 'json-schema-ref-parser';
-import FormSchema from '@formschema/native';
+import FormSchema from '@yaaooo/vue-json-formschema';
 import schemaWithPointers from './schema/with-pointers.json';
 
 export default {
@@ -350,7 +344,7 @@ validator:
 
 <script>
   import Ajv from 'ajv';
-  import FormSchema from '@formschema/native';
+  import FormSchema from '@yaaooo/vue-json-formschema';
 
   export default {
     data: () => ({
@@ -473,7 +467,7 @@ Here an example with [Vue I18n](https://kazupon.github.io/vue-i18n):
 </template>
 
 <script>
-  import FormSchema from '@formschema/native';
+  import FormSchema from '@yaaooo/vue-json-formschema';
 
   export default {
     data: () => ({
@@ -809,8 +803,8 @@ To define custom elements, you need to use the `NativeComponents` class and the
 ```js
 // MyCustomComponents.js
 
-// First, import the base class Components from `@formschema/native` package
-import { NativeComponents } from '@formschema/native';
+// First, import the base class Components from `@yaaooo/vue-json-formschema` package
+import { NativeComponents } from '@yaaooo/vue-json-formschema';
 
 // Then declare your custom components as functional components
 import { InputElement } from '@/components/InputElement';
@@ -845,15 +839,13 @@ export class MyCustomComponents extends NativeComponents {
 }
 ```
 
-> See the file [NativeComponents.ts](https://gitlab.com/formschema/native/blob/master/src/lib/NativeComponents.ts) for an example.
-
 ```html
 <template>
   <FormSchema v-model="model" :schema="schema" :components="components"/>
 </template>
 
 <script>
-  import FormSchema from '@formschema/native'
+  import FormSchema from '@yaaooo/vue-json-formschema'
   import { MyCustomComponents } from './MyCustomComponents'
 
   export default {
@@ -866,11 +858,6 @@ export class MyCustomComponents extends NativeComponents {
   }
 </script>
 ```
-
-[**ElementUI Example**](https://gitlab.com/formschema/components/elementui)
-
-- Definition: https://gitlab.com/formschema/components/elementui/blob/master/lib/ElementUIComponents.js
-- Usage: https://gitlab.com/formschema/components/elementui/blob/master/playground/src/components/Subscription.vue
 
 ## Descriptor Interface
 
@@ -988,10 +975,6 @@ interface ArrayDescriptor extends DescriptorDefinition {
 }
 ```
 
-## Contributing
-
-Please see [contributing guide](https://gitlab.com/formschema/native/blob/master/CONTRIBUTING.md).
-
 ## License
 
-Under the MIT license. See [LICENSE](https://gitlab.com/formschema/native/blob/master/LICENSE) file for more details.
+Under the MIT license. See [LICENSE](https://github.com/yaaooo/vue-json-formschema/blob/master/LICENSE) file for more details.

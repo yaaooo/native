@@ -350,7 +350,7 @@ const FormSchema: FormSchemaComponent = {
      * </template>
      *
      * <script>
-     *   import FormSchema from '@formschema/native'
+     *   import FormSchema from '@yaaooo/vue-json-formschema'
      *
      *   export default {
      *     components: { FormSchema },

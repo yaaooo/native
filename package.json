@@ -1,7 +1,7 @@
 {
-  "name": "@formschema/native",
-  "version": "2.0.0-beta.2",
-  "description": "Vue component form based on JSON Schema",
+  "name": "@yaaooo/vue-json-formschema",
+  "version": "0.1.0",
+  "description": "Vue form generator that consumes JSON schema, forked from @formschema/native.",
   "main": "dist/FormSchema.esm.min.js",
   "browser": "dist/FormSchema.umd.min.js",
   "types": "types/index.d.ts",
@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/formschema/native.git"
+    "url": "git+https://github.com/yaaooo/vue-json-formschema.git"
   },
   "keywords": [
     "vue",
@@ -27,12 +27,11 @@
     "schema",
     "jsonschema"
   ],
-  "author": "Sébastien Demanou",
   "license": "MIT",
   "bugs": {
-    "url": "https://gitlab.com/formschema/native/issues"
+    "url": "https://github.com/yaaooo/vue-json-formschema/issues"
   },
-  "homepage": "https://gitlab.com/formschema/native",
+  "homepage": "https://github.com/yaaooo/vue-json-formschema",
   "devDependencies": {
     "@babel/core": "^7.11.1",
     "@babel/preset-env": "^7.11.0",
