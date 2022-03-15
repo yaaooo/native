@@ -23,7 +23,7 @@ describe("lib/CreateInput", () => {
 
       expect(tag).toBe("input");
 
-      expect(Object.keys(data)).toEqual([ "key", "attrs", "on" ]);
+      expect(Object.keys(data)).toEqual([ "domProps", "key", "attrs", "on" ]);
       expect(Object.keys(data.on)).toEqual([ "input" ]);
       expect(typeof data.on.input).toBe("function");
 
@@ -39,7 +39,7 @@ describe("lib/CreateInput", () => {
 
       expect(tag).toBe("input");
 
-      expect(Object.keys(data)).toEqual([ "key", "attrs", "on" ]);
+      expect(Object.keys(data)).toEqual([ "domProps", "key", "attrs", "on" ]);
       expect(Object.keys(data.on)).toEqual([ "input" ]);
       expect(typeof data.on.input).toBe("function");
 
