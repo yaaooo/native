@@ -2,7 +2,9 @@
 
 Vue form generator that consumes JSON schema.
 
-> Please note that this is a fork of [@formschema/native](https://github.com/formschema/native) authored by [@demsking](https://github.com/demsking). This fork aims to close out some gaps on the original package and make the generated form behave more intuitively (e.g. ensuring that parent fields are not reset when child fields are added).
+> Please note that this is a fork of [@formschema/native](https://github.com/formschema/native) authored by [@demsking](https://github.com/demsking). This fork aims to close out some gaps on the original package and make the generated form behave more intuitively. For example:
+> - Values in parent fields are not reset when child fields are added
+> - Array inputs with one item will still display control buttons 
 
 ## Table of Contents
 
