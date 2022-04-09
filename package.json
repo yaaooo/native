@@ -1,6 +1,6 @@
 {
   "name": "@yaaooo/vue-json-formschema",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Vue form generator that consumes JSON schema, forked from @formschema/native.",
   "main": "dist/FormSchema.esm.min.js",
   "browser": "dist/FormSchema.umd.min.js",
